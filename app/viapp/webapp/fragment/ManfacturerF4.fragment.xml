@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:m="sap.ui.commons.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	<SelectDialog cancel="onF4Close" noDataText="No Data" title="Select Manfacturer" class="Cl_PlantFragmentTitleText"
+		confirm="onManfacturerConfirm" items="{oViewModel>/ManufacturerF4}" liveChange="onSearchManufacture">
+		<StandardListItem title="{oViewModel>Manufacture}" class="Cl_PlantFragmentTitleText"/>
+	</SelectDialog>
+</core:FragmentDefinition>

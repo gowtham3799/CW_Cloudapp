@@ -1,0 +1,76 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Lube.controller.Search"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:f="sap.f" xmlns:cssgrid="sap.ui.layout.cssgrid" xmlns:grid="sap.ui.layout.cssgrid" xmlns:t="sap.tnt" xmlns:tnt="sap.tnt">
+	<Dialog stretchOnPhone="true" contentHeight="100%" contentWidth="60%" class="sapUiSizeCompact" afterClose="dialogAfterclose"
+		title="Select Material" escapeHandler=".handleEscape">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Label design="Bold" text="Select Material" class="PageHead"/>
+				</contentMiddle>
+				<contentRight>
+					<!--<Button icon="sap-icon://cart-approval" type="Emphasized" text="{ServicesViewModel>/SelectedinMaterialF4Count}"-->
+					<!--	class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>-->
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+		
+			
+			
+			
+			<f:GridList items="{ServicesViewModel>/MaterialList}" class="sapUiTinyMarginTop cl_Materialgridlist cl_wgridlist" mode="None"
+				visible="{oGlobalModel>/CW_ProcessVisible}" headerDesign="Plain" sticky="HeaderToolbar">
+				<f:headerToolbar>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer/>
+							<Button icon="{imageModel>/path}/image/undo.png" type="Default"/>
+							<SearchField width="40%" liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>
+						</content>
+					</Toolbar>
+				</f:headerToolbar>
+				<f:customLayout>
+					<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+				</f:customLayout>
+				<f:GridListItem press="onSelectMaterial" type="{ServicesViewModel>Type}"
+					class="cl_Materialgridlist cl_wgridlist sapUiSmallMarginBegin sapUiSmallMarginEnd">
+					<!--New Alignment Carwash-->
+					<!--<VBox class="CL_VboxHeight">-->
+					<HBox height="100%">
+						<!--<Image src="{imageModel>/path}/image/MaterialLogo.PNG" height="4rem" width="4rem" visible="true" class="sapUiTinyMarginTopBottom"/>-->
+						<Avatar src="{imageModel>/path}/image/MaterialIcon.PNG" displaySize="L" showBorder="false" displayShape="Square" press="onPress"
+							visible="true"/>
+						<!--<Avatar src="{imageModel>/path}/image/CWColorIcon1.png" displaySize="L" showBorder="false" displayShape="Square" press="onPress"-->
+						<!--	visible="{= ${ServicesViewModel>Highlight} ==='Information' ? true : false }" />-->
+						<VBox>
+							<VBox>
+								<HBox>
+									<Title text="{ServicesViewModel>Material}" class="cl_blueTXT sapUiTinyMarginBegin sapUiMediumMarginEnd sapUiTinyMarginTopBottom"/>
+									<Title text="{ServicesViewModel>Total}" class="cl_blueTXT sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>
+								</HBox>
+							</VBox>
+							<!--<Title text="Name" wrapping="true"/>-->
+							<VBox>
+								<Label text="{ServicesViewModel>MaterialName}" wrapping="true" class="cl_blueTXT sapUiTinyMarginBegin"/>
+							</VBox>
+							<VBox>
+								<HBox>
+									<ObjectStatus title="Net" text="123.00" state="Error" class="sapUiTinyMarginBeginEnd"/>
+									<ObjectStatus title="Tax" text="2.00" state="Error" class="sapUiTinyMarginBeginEnd sapUiTinyMarginBottom"/>
+								</HBox>
+							</VBox>
+						</VBox>
+					</HBox>
+					<!--</VBox>-->
+				</f:GridListItem>
+			</f:GridList>
+		</content>
+		<buttons>
+			<!--<Button text="Add to Cart" type="Emphasized" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="onPressCart"-->
+			<!--	class="sapUiSmallMarginEnd" icon="sap-icon://cart-approval"/>-->
+			<Button text="Close" type="Reject" iconFirst="true" press="onCloseMaterialF4" iconDensityAware="false" class="sapUiSmallMarginEnd"
+				icon="sap-icon://decline"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

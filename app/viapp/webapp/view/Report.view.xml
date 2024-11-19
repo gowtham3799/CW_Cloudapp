@@ -1,0 +1,71 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="viapp.controller.Report"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:form="sap.ui.layout.form" xmlns:f="sap.f" xmlns:grid="sap.ui.layout.cssgrid">
+		<App>
+		<pages>
+			<Page title="Display Price" showHeader="false" class="Cl_PlantFragmentTitleText">
+				<content>
+					<Title text="Report" level="H1" class="cl_WelcomeText sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+					<!--Grid-->
+					<f:GridList id="id_MaterialList" headerText="Car Wash Services" mode="None" items="{ReportModel>/ReportRecord}" sticky="HeaderToolbar">
+						<f:headerToolbar>
+							<Toolbar>
+								<content>
+									<FlexBox alignItems="Start" justifyContent="Start">
+										<Label text="Date" class="Cl_HeaderLabel sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTop"/>
+										<DateRangeSelection valueState="{valueState}" valueStateText="{valueStateText}"/>
+										<!--<HBox>-->
+										<!--	<RadioButtonGroup id="rbg1" columns="2" width="100%" class="sapUiMediumMarginBottom" valueState="information">-->
+										<!--		<RadioButton id="RB1-1" text="Closed"/>-->
+										<!--		<RadioButton id="RB1-2" text="Open"/>-->
+										<!--	</RadioButtonGroup>-->
+										<!--</HBox>-->
+										<Button text="Go" type="Emphasized" press="" class="cl_Emphasizebtn sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+										<Button text="Clear" type="Reject" class="cl_Rejectbtn sapUiTinyMarginEnd"/>
+									<!--	<Button text="Go" type="Emphasized" class="sapUiTinyMarginBegin" press="onPressGoPriceDetails"></Button>
+										<Button text="" type="Default" icon="sap-icon://reset" class="sapUiSmallMarginEnd sapUiTinyMarginBegin" press="onPressResetPriceDetails"></Button>-->
+									</FlexBox>
+									<!--<Title text="" level="H2"/>-->
+									<!--<ToolbarSpacer/>-->
+									<!--<SearchField width="auto" liveChange="onSearchMaterial" class="sapUiTinyMarginEnd"/>-->
+								</content>
+							</Toolbar>
+						</f:headerToolbar>
+						<f:customLayout>
+							<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+						</f:customLayout>
+						<f:GridListItem type="" class="Cl_SOItems sapUiTinyMarginBeginEnd">
+							<VBox height="100%" justifyContent="SpaceBetween">
+								<layoutData>
+									<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+								<VBox class="sapUiTinyMargin">
+									<HBox justifyContent="SpaceBetween">
+										<HBox>
+											<!-- <Image height="1.5rem" width="auto" src="{imageModel>/path}/image/ReportIcon.png" class="sapUiTinyMarginBeginEnd"/> -->
+											<ObjectAttribute text="{ReportModel>SaleOrder}" active="true" class="Cl_FormLabel sapUiTinyMarginBeginEnd"/>
+										</HBox>
+										<ObjectStatus class="Cl_ReportText sapUiTinyMarginBottom" text="{ReportModel>Status}" inverted="true" icon="sap-icon://sys-enter-2" state="Success"/>
+										<!--<ObjectStatus title="Price" text="{ReportModel>TotalPrice}" state="Success"/>-->
+									</HBox>
+									<HBox class="sapUiTinyMarginBeginEnd">
+										<Label text="Invoice : {ReportModel>Invoice}" wrapping="true" class="sapUiSmallMarginEnd Cl_ReportText"/>
+										<Label text="Date : {ReportModel>Date}" wrapping="true" class="sapUiSmallMarginEnd Cl_ReportText"/>
+									</HBox>
+								</VBox>
+								<OverflowToolbar design="Solid">
+										<ObjectStatus title="Amount" text="{ReportModel>Amount}" state="Information" active="true" press="onPressCheckCard"
+									class="Cl_HeaderField sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom"/>
+									<!--<ObjectStatus title="Amount" text="{ReportModel>Amount}" state="Information" class="Cl_HeaderField Cl_ReportText sapUiTinyMarginBegin sapUiSmallMarginEnd"/>-->
+									<ToolbarSpacer/>
+									<ToolbarSpacer/>
+									<!--<Button icon="sap-icon://edit" type="Transparent"/>-->
+									<!--<Button icon="sap-icon://delete" type="Transparent"/>-->
+									<Button icon="sap-icon://message-information" type="Transparent"/>
+								</OverflowToolbar>
+							</VBox>
+						</f:GridListItem>
+					</f:GridList>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

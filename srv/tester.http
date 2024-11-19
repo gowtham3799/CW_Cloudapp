@@ -1,0 +1,152 @@
+GET http://localhost:4004/odata/v4/CarwashService
+
+###Read service metadata
+GET http://localhost:4004/odata/v4/CarwashService/$metadata
+
+
+###Get Materials
+GET http://localhost:4004/odata/v2/CarwashService/Material_V
+
+
+###Get Plants
+GET http://localhost:4004/odata/v4/CarwashService/Plant
+
+###Get Top orders
+GET http://localhost:4004/odata/v4/CarwashService/Order?$filter=ORDERNUM eq '2000000524'&$expand=ITEMS
+
+###Create Order
+POST http://localhost:4004/odata/v4/CarwashService/Order
+Content-Type: application/json
+
+{
+        "PLATECODE" : "A",
+        "PLATENUM": "12345",
+        "SOURCE" : "DUBAI",
+        "KIND" : "PRIVATE"
+}
+
+
+###Get Payment
+GET http://localhost:4004/odata/v4/CarwashService/Payment
+
+
+###Create Payment
+POST http://localhost:4004/odata/v4/CarwashService/Payment
+Content-Type: application/json
+
+{       
+        "ORDER_KEY_ID" : "37ff1fec-cfe2-4eaf-a712-bf8ef89e1d6c",
+        //"ORDERNUM_ID" : "2000000529",
+        "AMOUNT" : 4500.00,
+        "CURRENCY" : "AED",
+        "ITEMS" : [
+            {   
+                "MOP_COUNTER" : "1",
+                "MOP_TYPE"  : "CASH",
+                "AMOUNT" : 1500.00,
+                "CURRENCY": "AED"
+            },
+            {
+                "MOP_COUNTER" : "2",
+                "MOP_TYPE"  : "CASH",
+                "AMOUNT" : 1500.00,
+                "CURRENCY": "AED",
+                "AUTH_CODE" : "1234456"
+
+            }
+        ]
+        
+}
+
+###Create Order
+POST http://localhost:4004/odata/v2/CarwashService/Order
+Content-Type: application/json
+
+{
+      "ID": "02BD2137-0890-1EEA-A6C2-BB55C198E8D5",
+      "OrderNum": "1000000002",
+        "PlateCode" : "A",
+        "PlateNum": "12345",
+        "Source" : "DUBAI",
+        "Kind" : "PRIVATE",
+        "Items" : [
+            {
+                "ID" : "02BD2137-0890-1EEA-A6C2-1B55C198E8D5",
+                "OrderNum_ID" : "1000000002",
+                "ItemNum" : "1",
+                "Material" : "12",
+                "Plant" : "A001",
+                "MaterialDesc" :  "Test",
+                "Quantity" : 1.00,
+                "UoM" : "EA",
+                "NetPrice" : 10.00,
+                "Currency" : "AED"
+            }
+        ]
+}
+
+
+###Create Order
+POST http://localhost:4004/odata/v2/CarwashService/Order
+Content-Type: application/json
+
+{
+      //"OrderNum": "1000000003",
+        "PLATECODE" : "A",
+        "PLATENUM": "12347",
+        "SOURCE" : "DUBAI",
+        "KIND" : "PRIVATE",
+        "ITEMS" : [
+            {
+                //"OrderNum_ID" : "1000000003",
+                "ITEMNUM" : "1",
+                "MATERIAL" : "12",
+                "PLANT" : "A001",
+                "MATERIALDESC" :  "Test",
+                "QUANTITY" : 1.00,
+                "UOM" : "EA",
+                "NETPRICE" : 10.00,
+                "CURRENCY" : "AED"
+            }
+        ]
+}
+
+
+###Get order items
+GET http://localhost:4004/odata/v4/CarwashService/OrderItem
+
+
+###Get Top orders
+GET http://localhost:4004/odata/v4/CarwashService/Order?$expand=Items
+
+###Create Payment
+POST http://localhost:4004/odata/v4/CarwashService/Payment
+
+Content-Type: application/json
+
+{       
+        "ORDER_KEY_ID" : "37ff1fec-cfe2-4eaf-a712-bf8ef89e1d6c",
+        "ORDERNUM_ID" : "2000000529",
+        "AMOUNT" : 4500.00,
+        "CURRENCY" : "AED",
+        "ITEMS" : [
+            {   
+                "MOP_COUNTER" : "1",
+                "MOP_TYPE"  : "CASH",
+                "AMOUNT" : 1500.00,
+                "CURRENCY": "AED"
+            },
+            {
+                "MOP_COUNTER" : "2",
+                "MOP_TYPE"  : "CASH",
+                "AMOUNT" : 1500.00,
+                "CURRENCY": "AED",
+                "AUTH_CODE" : "1234456"
+
+            }
+        ]
+        
+}
+
+###Get Top orders
+GET http://localhost:4004/odata/v4/CarwashService/Payment?$expand=ITEMS&$filter=ORDERNUM eq '2000000580'

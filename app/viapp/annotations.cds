@@ -1,0 +1,1 @@
+using CarwashService as service from '../../srv/service';

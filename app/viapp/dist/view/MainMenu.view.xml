@@ -1,0 +1,83 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="viapp.controller.MainMenu"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="Title" showHeader="false" class="sapUiSizeCompact">
+				<content>
+					<tnt:ToolPage id="id_CarwashtoolPage" class="cl_NavigationIcon">
+						<tnt:header>
+							<tnt:ToolHeader class="Cl_ToolHeader">
+								<Image height="1.3rem" src="{imageModel>/path}/image/MenuIcon.png" press=".onSideNavButtonPress"/>
+								<Image height="1.9rem" press="onPressmainHome" class="sapUiTinyMarginBegin" src="{imageModel>/path}/image/NewLogo.png"/>
+								<Title text="Car Wash" level="H1" class="cl_WelcomeText" visible="{oGlobalModel>/CW_ProcessVisible}"/>
+								<Title text="LPG" level="H1" class="cl_WelcomeText" visible="{oGlobalModel>/LPG_ProcessVisible}"/>
+								<ToolbarSpacer/>
+								<!--<ToolbarSpacer/>-->
+								<Image height="5.5rem" src="{imageModel>/path}/image/New_SearchIcon.svg" press="onPressSearchCustomer"/>
+								<Image height="1.3rem" src="{imageModel>/path}/image/location.png" press="onPressPlant"/>
+								<Link text="{oGlobalModel>/MainPlant}" press="onPressPlant" class="cl_WelcomeText sapUiTinyMarginEnd"/>
+								<!--<Image height="1.3rem" class="sapUiTinyMarginEnd" src="{imageModel>/path}/image/refresh-button.png" press=".onRefresh"/>-->
+							</tnt:ToolHeader>
+						</tnt:header>
+						<tnt:sideContent>
+							<tnt:SideNavigation id="sideNavigation" class="Cl_SideNav">
+								<tnt:NavigationList id="nav" class="Cl_NavBG Cl_NavTextColor">
+									<tnt:NavigationListItem text="Home" key="Home" select="onPressBanner" icon="sap-icon://home" id="Home" class="Cl_NavBG Cl_NavTextColor">
+										<!-- <tnt:NavigationListItem text="Customer" select="onView2" type="Navigation"/> -->
+									</tnt:NavigationListItem>
+									<tnt:NavigationListItem text="Service" key="Service" select="onPressService" icon="sap-icon://search" id="Search">
+										<!-- <tnt:NavigationListItem text="Customer" select="onView2" type="Navigation"/> -->
+									</tnt:NavigationListItem>
+									<tnt:NavigationListItem text="Report" key="Report" select="onPressReport" icon="sap-icon://manager-insight" id="Report">
+										<!-- <tnt:NavigationListItem text="Customer" select="onView2" type="Navigation"/> -->
+									</tnt:NavigationListItem>
+									<!--<tnt:NavigationListItem text="Quotataion" key="Quotataion" select="onPressQuotataion" icon="sap-icon://sales-quote" id="Quotataion">-->
+									<!-- <tnt:NavigationListItem text="Customer" select="onView2" type="Navigation"/> -->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Identify Vehicle" key="SearchCust" icon="sap-icon://lead" expanded="false">-->
+									<!--	<tnt:NavigationListItem text="Search Vehicle" select="onPressSearchCust" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Sales Order" key="SalesOrder" select="onPressEditSO" icon="sap-icon://my-sales-order" expanded="false">-->
+									<!--	<tnt:NavigationListItem text="Direct SalesOrder" key="DirectSalesOrder" select="onPressCreateSO" type="Navigation"/>-->
+									<!--<tnt:NavigationListItem text="Edit Sales Order" select="onPressCreateSO" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Orders" key="rootItem2" icon="sap-icon://customer-order-entry" expanded="false">-->
+									<!--	<tnt:NavigationListItem text="Display Orders" select="onPressDisplayPO" type="Navigation"/>-->
+									<!--<tnt:NavigationListItem text="Edit Sales Order" select="onPressEditSO" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Generate Request" key="PriceCheck" select="onPressDisplayPrice" icon="sap-icon://lead" expanded="false">-->
+									<!--<tnt:NavigationListItem text="Display Price" select="onPressDisplayPrice" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Contract" key="rootItem2" icon="sap-icon://decision" expanded="false">-->
+									<!--	<tnt:NavigationListItem text="Display Contract" select="onPressDisplayContract" type="Navigation"/>-->
+									<!--<tnt:NavigationListItem text="Edit Sales Order" select="onPressEditSO" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Pending Invoice" key="PendingDue" select="onPressDisplayInvoice" icon="sap-icon://monitor-payments"-->
+									<!--	expanded="false">-->
+									<!--<tnt:NavigationListItem text="Display Invoice" select="onPressDisplayInvoice" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Payment" select="onPressPayment" key="Payment" icon="sap-icon://lead" expanded="false">-->
+									<!--<tnt:NavigationListItem text="Display Invoice" select="onPressDisplayInvoice" type="Navigation"/>-->
+									<!--</tnt:NavigationListItem>-->
+									<!--<tnt:NavigationListItem text="Carwash Services" select="onPresscarwash" key="CarwashServices" icon="sap-icon://car-rental" expanded="false"></tnt:NavigationListItem>-->
+								</tnt:NavigationList>
+								<!--<tnt:fixedItem>-->
+								<!--	<tnt:NavigationList class="cl_Navigationlist">-->
+								<!--		<tnt:NavigationListItem text="Report" icon="sap-icon://customer-order-entry" select="onPressDisplayReport"/>-->
+								<!--		<tnt:NavigationListItem text="News" icon="sap-icon://newspaper" select="onPressDisplayNews"/>-->
+								<!--		<tnt:NavigationListItem text="Remark" icon="sap-icon://feedback" select="onPressDisplayRemark"/>-->
+								<!--	</tnt:NavigationList>-->
+								<!--</tnt:fixedItem>-->
+							</tnt:SideNavigation>
+						</tnt:sideContent>
+						<tnt:mainContents id="root">
+							<NavContainer id="pageContainer">
+								<pages ></pages>
+							</NavContainer>
+						</tnt:mainContents>
+					</tnt:ToolPage>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

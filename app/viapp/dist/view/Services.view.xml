@@ -1,0 +1,257 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="viapp.controller.Services"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:grid="sap.ui.layout.cssgrid" xmlns:layout="sap.ui.layout"
+	xmlns:tnt="sap.tnt" xmlns:f="sap.f" xmlns:t="sap.tnt">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" showHeader="false" class="Cl_PageBG sapUiSizeCompact" showFooter="true">
+				<f:GridList>
+					<f:customLayout>
+						<!--<grid:GridBoxLayout boxWidth="auto" />-->
+						<!--<grid:GridBoxLayout />-->
+						<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+					</f:customLayout>
+					<f:GridListItem class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom">
+						<OverflowToolbar height="auto" design="Solid" class="Cl_ToolBarHeaderBG">
+							<!--<Avatar displaySize="S" displayShape="Circle" showBorder="true" press="onPressSearchCustomer"-->
+							<!--	src="{imageModel>/path}/image/businessman2.png" badgeIcon="sap-icon://employee-lookup" badgeTooltip="Customer Profile"/>-->
+							<!--<Image height="3rem" src="{imageModel>/path}/image/CVHeader1.PNG" class="sapUiTinyMarginTop sapUiTinyMarginBegin"-->
+							<!--	press="onPressSearchCustomer"/>-->
+							<VBox class="sapUiTinyMarginBegin">
+								<Title text="{oGlobalModel>/Profile_BPNo} - {oGlobalModel>/Profile_Name}" wrapping="true" class="Cl_HeaderMobile sapUiTinyMarginTop"/>
+								<Text text="Mobile: {oGlobalModel>/Profile_Mobile}" wrapping="true" class="Cl_HeaderMobile sapUiTinyMarginBottom"/>
+							</VBox>
+						</OverflowToolbar>
+						<VBox justifyContent="SpaceBetween">
+							<layoutData>
+								<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+							<!--<HBox alignItems="Start" justifyContent="SpaceBetween" visible="{oGlobalModel>/CW_ProcessVisible}">-->
+							<!--	<ObjectStatus title="Plate Detail" text="{oGlobalModel>/Profile_PlateNo} / {oGlobalModel>/Profile_PlateCode}" state="Information"-->
+							<!--		class="Cl_HeaderField sapUiSmallMarginBegin sapUiTinyMarginTop sapUiTinyMarginBottom"/>-->
+							<!--	<ObjectStatus title="Emirates" text="{oGlobalModel>/Profile_Emirates}" state="Information"-->
+							<!--		class="Cl_HeaderField sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>-->
+							<!--	<ObjectStatus title="Model" text="{oGlobalModel>/Profile_Model}" state="Information"-->
+							<!--		class="Cl_HeaderField sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>-->
+							<!--</HBox>-->
+							<HBox alignItems="Start" visible="true">
+								<ObjectStatus title="Loyalty" text="500000017" state="Information" active="true" press="onPressCheckCard"
+									class="Cl_HeaderField sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom" icon="sap-icon://bar-code"/>
+								<!--<ObjectStatus title="Loyalty Id" text="500000017" state="Information" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>-->
+								<ObjectStatus title="Order" text="{ServicesViewModel>/SO_Number}" state="Information"
+									class="Cl_HeaderField sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>
+								<!--<ObjectStatus title="Invoice" text="Not Created" state="Information" class="Cl_HeaderField sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>-->
+							</HBox>
+						</VBox>
+					</f:GridListItem>
+				</f:GridList>
+				<f:GridListItem class="cl_HeaderGrid sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" type="None" height="auto" visible="false">
+					<HBox alignItems="Start" justifyContent="SpaceBetween">
+						<HBox>
+							<Image height="3rem" src="{imageModel>/path}/image/CVHeader1.PNG" class="sapUiSmallMarginTop sapUiSmallMarginBegin"
+								press="onPressSearchCustomer"/>
+							<VBox>
+								<ObjectIdentifier title="{oGlobalModel>/Profile_BPNo} - {oGlobalModel>/Profile_Name}" titleActive="true"
+									class="sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginTop sapUiTinyMarginEnd"/>
+								<ObjectStatus title="Mobile" text="{oGlobalModel>/Profile_Mobile}" state="Information" class="sapUiTinyMarginBegin sapUiTinyMarginTop"/>
+							</VBox>
+						</HBox>
+						<!--<ObjectNumber number="{oGlobalModel>/Cart_TotalAmount}" numberUnit="AED" state="Success"-->
+						<!--	class="Cl_AmountText sapUiSmallMarginTop sapUiTinyMarginEnd"/>-->
+					</HBox>
+					<HBox alignItems="Start" justifyContent="SpaceBetween" visible="{oGlobalModel>/CW_ProcessVisible}">
+						<ObjectStatus title="Plate Detail" text="{oGlobalModel>/Profile_PlateNo} / {oGlobalModel>/Profile_PlateCode}" state="Information"
+							class="Cl_HeaderField sapUiSmallMarginBegin sapUiTinyMarginTop sapUiSmallMarginBottom"/>
+						<ObjectStatus title="Emirates" text="{oGlobalModel>/Profile_Emirates}" state="Information"
+							class="Cl_HeaderField sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>
+						<ObjectStatus title="Model" text="{oGlobalModel>/Profile_Model}" state="Information"
+							class="Cl_HeaderField sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>
+					</HBox>
+					<HBox alignItems="Start" justifyContent="SpaceBetween" visible="false">
+						<!--<ObjectStatus title="Loyalty Id" text="500000017" state="Information" active="true" press="onPressLoyalty"-->
+						<!--	class="sapUiSmallMarginBegin sapUiSmallMarginBottom" icon="sap-icon://bar-code"/>-->
+						<ObjectStatus title="SaleOrder" text="Not Created" state="Information"
+							class="Cl_HeaderField sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>
+						<ObjectStatus title="Invoice" text="Not Created" state="Information" class="Cl_HeaderField sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>
+					</HBox>
+				</f:GridListItem>
+				<f:GridListItem class="cl_HeaderGrid sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" type="None" height="auto" visible="false">
+					<HBox alignItems="Start" justifyContent="SpaceBetween" visible="true">
+						<ObjectStatus title="Loyalty" text="500000017" state="Information" active="true" press="onPressCheckCard"
+							class="Cl_HeaderField sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom" icon="sap-icon://bar-code"/>
+						<!--<ObjectStatus title="Loyalty Id" text="500000017" state="Information" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>-->
+						<ObjectStatus title="SaleOrder" text="Not Created" state="Information"
+							class="Cl_HeaderField sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>
+						<ObjectStatus title="Invoice" text="Not Created" state="Information" class="Cl_HeaderField sapUiSmallMarginEnd sapUiTinyMarginTopBottom"/>
+					</HBox>
+				</f:GridListItem>
+		<IconTabBar headerBackgroundDesign="Translucent" backgroundDesign="Translucent" id="idIconTabBarInlineMode" headerMode="Inline"
+					expanded="true" expand="true" expandable="true" selectedKey="" class="Cl_TabbarTextBold">
+					<items>
+						<!--Carwash-->
+						<IconTabFilter text="Services" key="Services" visible="{oGlobalModel>/CW_ProcessVisible}">
+							<f:GridList id="idgridlist" items="{ServicesViewModel>/CWMaterial}"
+								class="cl_CWgridlistBG sapUiTinyMarginTop cl_Materialgridlist cl_wgridlist" mode="None">
+								<!--<f:GridList id="idgridlist" items="{ServicesViewModel>/CWMaterial}"-->
+								<!--	class="sapUiTinyMarginTop cl_GridListBG cl_Materialgridlist cl_wgridlist" mode="None" headerDesign="Plain" sticky="HeaderToolbar">-->
+								<!--<f:headerToolbar>-->
+								<!--	<Toolbar>-->
+								<!--		<content>-->
+								<!--			<ToolbarSpacer/>-->
+								<!--<Button icon="{imageModel>/path}/image/cart.png" type="Default" press="onPressAddonMaterial"/>-->
+								<!--			<SearchField liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>-->
+								<!--			<Button icon="{imageModel>/path}/image/undo.png" type="Default" press="onResetCarwash"/>-->
+								<!--		</content>-->
+								<!--	</Toolbar>-->
+								<!--</f:headerToolbar>-->
+								<f:headerToolbar>
+									<Toolbar>
+										<content>
+											<!--<Title text="Services" level="H2"/>-->
+											<ToolbarSpacer/>
+											<!--<SearchField liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>-->
+											<Button icon="sap-icon://refresh" type="Default" press="onResetCarwash" class="Cl_IconColor"/>
+										</content>
+									</Toolbar>
+								</f:headerToolbar>
+								<f:customLayout>
+									<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+								</f:customLayout>
+								<f:GridListItem press="onPress1" type="{ServicesViewModel>Type}" highlight="{ServicesViewModel>Highlight}"
+									class="Cl_SOItems cl_CWgridlistBG cl_wgridlist sapUiTinyMarginBegin sapUiSmallMarginEnd">
+									<!--old Alignment Carwash-->
+									<!--New alignment-->
+									<VBox justifyContent="SpaceBetween">
+										<layoutData>
+											<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+										<VBox class="sapUiTinyMargin">
+											<HBox justifyContent="SpaceBetween">
+												<Title level="H3" text="{ServicesViewModel>MaterialName}" wrapping="true"
+													class="Cl_MaterialTitleColor sapUiTinyMarginBegin sapUiTinyMarginTopBottom"/>
+												<ObjectNumber class="Cl_MaterialTitleColor sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" number="{ServicesViewModel>Price}"/>
+											</HBox>
+										</VBox>
+									</VBox>
+								</f:GridListItem>
+							</f:GridList>
+						</IconTabFilter>
+						<!--LPG-->
+						<IconTabFilter text="LPG" key="LPG" visible="{oGlobalModel>/LPG_ProcessVisible}">
+							<f:GridList id="idLPGlist" items="{ServicesViewModel>/LPGMaterial}" class="sapUiTinyMarginTop cl_Materialgridlist cl_wgridlist" mode="None">
+								<f:headerToolbar>
+									<Toolbar>
+										<content>
+											<!--<Title text="Services" level="H2"/>-->
+											<!--<ToolbarSpacer/>-->
+											<SearchField liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>
+											<Button icon="{imageModel>/path}/image/undo.png" type="Default" press="onResetCarwash"/>
+										</content>
+									</Toolbar>
+								</f:headerToolbar>
+								<f:customLayout>
+									<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+								</f:customLayout>
+								<SearchField width="auto"/>
+								<f:GridListItem press="onPress2" type="{ServicesViewModel>Type}"
+									class="cl_Materialgridlist cl_wgridlist sapUiSmallMarginBegin sapUiSmallMarginEnd">
+									<!--New Alignment Carwash-->
+									<VBox height="auto" justifyContent="SpaceBetween">
+										<layoutData>
+											<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+										<VBox class="Cl_LPGListHeight">
+											<HBox alignContent="Start" justifyContent="SpaceBetween">
+												<HBox>
+													<Image src="{imageModel>/path}/image/GassWhiteIcon.png" height="5rem" width="5rem"
+														visible="{= ${ServicesViewModel>Highlight} ==='None' ? true : false }"></Image>
+													<Image src="{imageModel>/path}/image/LPGColorIcon.png" height="5rem" width="5rem"
+														visible="{= ${ServicesViewModel>Highlight} ==='Information' ? true : false }"></Image>
+													<VBox>
+														<Title level="H3" text="{ServicesViewModel>Material}" wrapping="true" class="sapUiSmallMarginTop sapUiTinyMarginBeginEnd"/>
+														<Text text="{ServicesViewModel>MaterialName}" wrapping="true" class=" sapUiTinyMarginBeginEnd"/>
+													</VBox>
+												</HBox>
+												<ObjectNumber class="sapUiSmallMarginTop sapUiTinyMarginBeginEnd" number="{ServicesViewModel>Price}"/>
+												<!--<t:InfoLabel text="{ServicesViewModel>Price}" colorScheme="6" class="Cl_InfoLabel sapUiSmallMarginTop sapUiTinyMarginBeginEnd"/>-->
+											</HBox>
+											<!--<Label text="Subtitle" wrapping="true" class="sapUiTinyMarginBottom"/>-->
+											<!--<Text text="A great description with useful information about this project." wrapping="true"/>-->
+										</VBox>
+										<!--<OverflowToolbar design="Solid">-->
+										<!--	<ToolbarSpacer/>-->
+										<!--	<Button icon="sap-icon://edit" type="Transparent"/>-->
+										<!--	<Button icon="sap-icon://delete" type="Transparent"/>-->
+										<!--	<Button icon="sap-icon://message-information" type="Transparent"/>-->
+										<!--</OverflowToolbar>-->
+									</VBox>
+									<!--New Item alignment-->
+								</f:GridListItem>
+							</f:GridList>
+						</IconTabFilter>
+						<!--Product-->
+						<IconTabFilter text="Accessories" key="Accessories" visible="true">
+							<f:GridList id="idLProductlist" items="{ServicesViewModel>/MaterialList}" class="sapUiTinyMarginTop cl_Materialgridlist cl_wgridlist"
+								mode="None">
+								<f:headerToolbar>
+									<Toolbar>
+										<content>
+											<!--<Title text="Services" level="H2"/>-->
+											<ToolbarSpacer/>
+											<!--<SearchField liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>-->
+											<Button icon="sap-icon://refresh" type="Default" press="onResetProduct" class="Cl_IconColor"/>
+										</content>
+									</Toolbar>
+								</f:headerToolbar>
+								<f:customLayout>
+									<!--<grid:GridBoxLayout boxWidth="21rem"/>-->
+									<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+								</f:customLayout>
+								<SearchField width="auto"/>
+								<f:GridListItem press="onSelectMaterial" type="Active" highlight="{ServicesViewModel>Highlight}"
+									class="Cl_SOItems cl_MaterialgridlistBG cl_Materialgridlist cl_wgridlist sapUiSmallMarginBegin sapUiSmallMarginEnd">
+									<!--New Alignment Carwash-->
+									<VBox justifyContent="SpaceBetween">
+										<layoutData>
+											<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+										<VBox class="sapUiTinyMargin">
+											<HBox justifyContent="SpaceBetween">
+												<Title level="H3" text="{ServicesViewModel>MATERIAL}" wrapping="true"
+													class="Cl_MaterialTitleColor sapUiTinyMarginBegin sapUiTinyMarginTopBottom"/>
+												<ObjectNumber class="Cl_MaterialTitleColor sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" number="{ServicesViewModel>NETPRICE}"/>
+											</HBox>
+											<HBox justifyContent="SpaceBetween">
+												<Title level="H5" text="{ServicesViewModel>MATDESC}" wrapping="true"
+													class="Cl_MaterialTitleColor sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>
+												<StepInput  value="{ServicesViewModel>Quantity}" min="1" max="99"  width="6rem"
+													enabled="true" editable="true" change="onChangeQuantity"/>
+											</HBox>
+										</VBox>
+									</VBox>
+								</f:GridListItem>
+							</f:GridList>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+	<footer>
+					<OverflowToolbar enabled="true" visible="true">
+						<ToolbarSpacer/>
+						<content>
+							<Button class="sapUiSmallMarginEnd" text="My Cart" type="Emphasized" visible="{oGlobalModel>/CW_ProcessVisible}" press="onPressCart">
+								<customData>
+									<BadgeCustomData key="badge" value="{ServicesViewModel>/MyCartCount}" visible="true"/>
+								</customData>
+							</Button>
+							<!--<Button text="My Cart" type="Emphasized" iconFirst="true" width="auto" visible="{oGlobalModel>/CW_ProcessVisible}" iconDensityAware="false"-->
+							<!--	press="onPressCart" class="cl_Emphasizebtn sapUiSmallMarginEnd" icon="sap-icon://cart-3"/>-->
+							<Button text="My Cart" type="Emphasized" iconFirst="true" width="auto" visible="{oGlobalModel>/LPG_ProcessVisible}" iconDensityAware="false"
+								press="onPressCart" class="cl_Emphasizebtn sapUiSmallMarginEnd"/>
+							<Button text="Cancel" type="Reject" iconFirst="true" width="auto" visible="{oGlobalModel>/CW_ProcessVisible}" iconDensityAware="false"
+								press="onPressCancelCW" class="cl_Rejectbtn sapUiSmallMarginEnd" icon="sap-icon://decline"/>
+							<Button text="Cancel" type="Reject" iconFirst="true" width="auto" visible="{oGlobalModel>/LPG_ProcessVisible}" iconDensityAware="false"
+								press="onPressCancelGas" class="cl_Rejectbtn sapUiSmallMarginEnd" icon="sap-icon://decline"/>
+							<!--<Button text="Cancel LPG" type="Reject" iconFirst="true" width="auto" visible="{oGlobalModel>/LPG_ProcessVisible}" iconDensityAware="false"-->
+							<!--	press="onPressCancelGas" class="sapUiSmallMarginEnd" icon="sap-icon://decline"/>-->
+						</content>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

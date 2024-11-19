@@ -1,0 +1,222 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified">
+	<Dialog contentHeight="auto" contentWidth="85%" class="Page_BC PageHead sapUiSizeCompact" afterClose="dialogAfterclose"
+		title="Create New Customer/Vechicle Master" titleAlignment="Center" escapeHandler=".handleEscape">
+		<customHeader>
+			<Bar>
+				<contentMiddle>
+					<Label design="Bold" text="Tag | UnTag Vehicle" class="Cl_TagunTag PageHead"/>
+				</contentMiddle>
+				<contentRight>
+					<!--<Button press="onRefreshProcess" icon="sap-icon://edit" visible=></Button>-->
+					<Button press="onRefreshProcess" icon="sap-icon://refresh"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content class="sapUiSizeCompact">
+			<!--MockData-->
+			<form:Form editable="true" class="Cl_TagunTag Cl_CCFormLabelColor">
+				<f:title>
+					<core:Title text="Customer No:" class="Cl_CCFormLabelColor"/>
+				</f:title>
+				<form:layout>
+					<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+						emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+				</form:layout>
+				<!--Customer-->
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="First Name" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{EditCustomerModel>/EC_PlateCode}" required="true"></Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Last Name" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{EditCustomerModel>/EC_PlateCode}" required="false"></Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Email ID" class="Cl_TagunTag">
+								<form:fields>
+									<Input value="{EditCustomerModel>/EC_PlateCode}" required="false"></Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Mobile No" class="Cl_TagunTag">
+								<form:fields>
+									<HBox>
+										<Input value="{DetailViewModel>/TuT_HeaderData/Tellong1}" description="{DetailViewModel>/TuT_HeaderData/Code1}"
+											editable="{DetailViewModel>/TUT_MobileNoEditable}" valueHelpRequest="onOpenCountryCodeF4" showSuggestion="true"
+											suggestionItemSelected="onPonumberConfirm" showValueHelp="true" class="sapUiTinyMarginEnd" valueHelpOnly="true" placeholder="Code"
+											maxLength="4" width="6rem" required="false">
+											<layoutData>
+												<l:GridData span="XL1 L2 M2 S4"/>
+											</layoutData>
+										</Input>
+										<Input value="{DetailViewModel>/TuT_HeaderData/Mobile}" width="8rem" type="Tel" editable="{DetailViewModel>/TUT_MobileNoEditable}"
+											required="false" maxLength="9" placeholder="Enter Mobile No" change="onTUTMobileNoChange"
+											valueState="{DetailViewModel>/TUT_MobileNoValueState}" valueStateText="Enter Mobile No" liveChange="onTuT_InputMobileNoLiveChange"
+											class="sapUiTinyMarginBeginEnd"/>
+										<Button icon="sap-icon://arrow-right" enabled="{DetailViewModel>/TUT_MoblieBtnValidate}" visible="{DetailViewModel>/TUT_MobileNoEditable}"
+											tooltip="Check" type="Emphasized" press="onTUTMobileNoSubmitB" class="cl_Emphasizebtn">
+											<layoutData>
+												<l:GridData span="XL1 L2 M2 S4"/>
+											</layoutData>
+										</Button>
+									</HBox>
+								</form:fields>
+							</form:FormElement>
+						</form:formElements>
+					</form:FormContainer>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Address" class="Cl_TagunTag">
+								<form:fields>
+									<TextArea value="{DetailViewModel>/TuT_HeaderData/SearchTerm}" valueState="None" placeholder="Enter Address" width="100%"
+										growingMaxLines="2" rows="2" maxLength="40" editable="{DetailViewModel>/TuT_HeaderDataVisible}"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Street / House No" class="Cl_TagunTag">
+								<form:fields>
+									<HBox>
+										<Input value="{DetailViewModel>/TuT_HeaderData/Street}" required="false" type="Text" maxLength="60"
+											editable="{DetailViewModel>/TuT_HeaderDataVisible}"  width="95%"/>
+										<Input value="{DetailViewModel>/TuT_HeaderData/HouseNo}" required="false" type="Text" maxLength="10"
+											editable="{DetailViewModel>/TuT_HeaderDataVisible}"  width="95%"/>
+								
+								</HBox>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Postal Code" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{DetailViewModel>/TuT_HeaderData/District}" required="false" editable="{DetailViewModel>/TuT_HeaderDataVisible}"/>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="City" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{DetailViewModel>/TuT_HeaderData/District}" required="false" editable="{DetailViewModel>/TuT_HeaderDataVisible}"/>
+							</form:fields>
+						</form:FormElement>
+					</form:formElements>
+				</form:FormContainer>
+			</form:formContainers>
+			<!--Vehicle-->
+			<form:formContainers>
+				<form:FormContainer>
+					<form:formElements>
+						<form:FormElement label="Tag New Vehicle" class="Cl_TagunTag">
+							<form:fields>
+								<CheckBox valueState="Information" selected="{DetailViewModel>/TUT_SelectNewVehicleCheckbox}" select="onSelectNewVehicle"
+									editable="{DetailViewModel>/TuT_EditableField}" enabled="{DetailViewModel>/TuT_EditableField}"/>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Change Plate Details" class="Cl_TagunTag">
+							<form:fields>
+								<CheckBox valueState="Warning" selected="{DetailViewModel>/TUT_SelectEmiratesCombinationCheckbox}"
+									select="onSelectEmiratesCombinationVehicle" editable="{DetailViewModel>/TuT_CheckBoxEmiratesCombination}"
+									enabled="{DetailViewModel>/TuT_CheckBoxEmiratesCombination}"/>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Emirates" class="Cl_TagunTag">
+							<form:fields>
+								<ComboBox value="{oViewModel>/CC_Emirates}" required="true" placeholder="Select Emirates"
+									items="{ path: 'oViewModel>/EmiratesF4', sorter: { path: 'text' } }">
+									<core:Item key="{oViewModel>Emirates}" text="{oViewModel>Emirates}"/>
+								</ComboBox>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Plate Category" class="Cl_TagunTag">
+							<form:fields>
+								<ComboBox value="{oViewModel>/CC_Category}" required="true" placeholder="Plate Category"
+									items="{ path: 'oViewModel>/PlateCategoryF4', sorter: { path: 'text' } }">
+									<core:Item key="{oViewModel>Category}" text="{oViewModel>Category}"/>
+								</ComboBox>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Plate Code" class="Cl_TagunTag">
+							<form:fields>
+								<ComboBox value="{oViewModel>/CC_PlateCode}" required="true" placeholder="Plate Code"
+									items="{ path: 'oViewModel>/PlateCodeF4', sorter: { path: 'text' } }">
+									<core:Item key="{oViewModel>PlateCode}" text="{oViewModel>PlateCode}"/>
+								</ComboBox>
+								<!--<Input value="{EditCustomerModel>/EC_PlateCode}" required="true"></Input>-->
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Plate No" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{oViewModel>/CC_PlateNo}" required="true" placeholder="Enter Plate No" liveChange="onPlateNoInputLiveChange" type="Text"
+									maxLength="5"/>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="VIN NO" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{oViewModel>/CC_VINNo}" placeholder="Enter VIN No" liveChange="onVINInputLiveChange" type="Text" maxLength="17"/>
+							</form:fields>
+						</form:FormElement>
+					</form:formElements>
+				</form:FormContainer>
+				<form:FormContainer>
+					<form:formElements>
+						<form:FormElement label="Manufacturer" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{oViewModel>/CC_Manfacturer}" editable="true" valueHelpRequest="onOpenManufactureF4" showSuggestion="true"
+									liveChange="onPoNumberInput" suggestionItemSelected="onPonumberConfirm" showValueHelp="true" class="sapUiSmallMarginEnd"
+									valueHelpOnly="true" placeholder="Select Manfacturer" required="true" valueStateText="Select Manfacturer"></Input>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Model" class="Cl_TagunTag">
+							<form:fields>
+								<Input value="{oViewModel>/CC_Model}" editable="true" valueHelpRequest="onOpenModelF4" showSuggestion="true" showValueHelp="true"
+									class="sapUiSmallMarginEnd" valueHelpOnly="true" placeholder="Select Model" required="true" valueStateText="Select Model"></Input>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Car Type" class="Cl_TagunTag">
+							<form:fields>
+								<ComboBox value="{oViewModel>/CC_CarType}" placeholder="Select Type">
+									<core:Item key="SUV" text="SUV"/>
+									<core:Item key="SEDAN" text="SEDAN"/>
+								</ComboBox>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Fuel type" class="Cl_TagunTag">
+							<form:fields>
+								<ComboBox value="{oViewModel>/CC_FuelType}" selectionChange="onChangeManufacture" placeholder="Select Type"
+									items="{ path: 'oViewModel>/FuelTypeF4', sorter: { path: 'text' } }">
+									<core:Item key="{oViewModel>FuelType}" text="{oViewModel>FuelType}"/>
+								</ComboBox>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Year" class="Cl_TagunTag">
+							<form:fields>
+								<DatePicker value="{oViewModel>/CC_Year}" displayFormat="yyyy" change="handleChange" class="sapUiSmallMarginBottom"/>
+							</form:fields>
+						</form:FormElement>
+						<form:FormElement label="Cylinder">
+							<form:fields>
+								<RadioButtonGroup selectedIndex="{DetailViewModel>/TuT_CylinderIndex}" columns="3" width="100%" select="onCNC_CylinderSelect"
+									editable="{DetailViewModel>/TUT_RadioEditable}" enabled="{DetailViewModel>/TuT_VehicleDetailsEnable}">
+									<RadioButton text="1 - 3 cyl"/>
+									<RadioButton text="4 cyl"/>
+									<RadioButton text="5 cyl"/>
+									<RadioButton text="6 cyl"/>
+									<RadioButton text="8 cyl"/>
+									<RadioButton text="10 cyl"/>
+									<RadioButton text="12 cyl"/>
+								</RadioButtonGroup>
+							</form:fields>
+						</form:FormElement>
+					</form:formElements>
+				</form:FormContainer>
+			</form:formContainers>
+		</form:Form>
+	</content>
+	<buttons>
+			
+			<Button text="Go" type="Emphasized" press="onPressAddvehicle" class="cl_Emphasizebtn sapUiTinyMarginEnd"/>
+			<Button text="Close" type="Reject" class="cl_Rejectbtn sapUiTinyMarginEnd" press="onCancelTagVehicleToCustomer"/>
+		
+		<!--<Button text="Save" type="Emphasized" press="onPressAddvehicle" ></Button>-->
+		<!--<Button text="Close" type="Reject" press="onCancelTagVehicleToCustomer" />-->
+	</buttons>
+</Dialog>
+</core:FragmentDefinition>

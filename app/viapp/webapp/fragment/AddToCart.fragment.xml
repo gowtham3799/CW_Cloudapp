@@ -1,0 +1,336 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+	xmlns:grid="sap.ui.layout.cssgrid" xmlns:layout="sap.ui.layout" xmlns:table="sap.ui.table" xmlns:m="sap.m" xmlns:fGrid="sap.f"
+	xmlns:f="sap.ui.layout.form" xmlns:ndc="sap.ndc">
+	<Dialog  contentHeight="100%" contentWidth="37%" class="sapUiSizeCompact" afterClose="dialogAfterclose"
+		title="Invoice Details">
+		<customHeader>
+			<Bar>
+				<contentLeft>
+					<Title level="H3" text="Total: {ServicesViewModel>/MyCartTotal} AED" class="cl_CartTotalText sapUiTinyMarginTopBottom" visible="true"/>
+				</contentLeft>
+				<contentMiddle></contentMiddle>
+				<contentRight>
+					<Button icon="sap-icon://decline" type="Reject" tooltip="Close" press="onCloseCart" class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content>
+			<OverflowToolbar >
+				<!-- <Title level="H3" text="My Cart {ServicesViewModel>/MyCartItemCount}"
+					class="cl_WelcomeText sapUiSmallMarginBeginEnd sapUiTinyMarginTopBottom" visible="true"/> -->
+				<ToolbarSpacer/>
+				<ToolbarSpacer/>
+				<Title level="H3" text="Order: {ServicesViewModel>/SO_Number}" class="cl_WelcomeText sapUiTinyMarginTopBottom" visible="true"/>
+			</OverflowToolbar>
+			<!--<Title level="H3" text="My Cart {ServicesViewModel>/MyCartItemCount}" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"-->
+			<!--	visible="true"/>-->
+			<List mode="Delete" delete="onDeleteCartItem" items="{ServicesViewModel>/MyCartItems}" noDataText="Your Cart Is Empty">
+				<CustomListItem>
+					<!--<HBox>-->
+					<!--	<core:Icon size="2rem" src="{imageModel>/path}/image/check-out.png" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />-->
+					<!--	<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >-->
+					<!--		<Link text="{ServicesViewModel>Material}"/>-->
+					<!--		<Label text="{ServicesViewModel>MaterialName}"/>-->
+					<!--	</VBox>-->
+					<!--	<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >-->
+					<!--		<Link text="{ServicesViewModel>Price}" press="handlePress"/>-->
+					<!--		<Label text="{ServicesViewModel>Tax}"/>-->
+					<!--	</VBox>-->
+					<!--</HBox>-->
+					<HBox alignItems="Start" justifyContent="SpaceBetween">
+						<!--	<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" >-->
+						<!--		<Link text="{ServicesViewModel>Material}"/>-->
+						<!--		<Label text="{ServicesViewModel>MaterialName}"/>-->
+						<!--	</VBox>-->
+						<HBox>
+							<!--<Image height="3.5rem" src="{imageModel>/path}/image/New_CartIcon.svg" class="sapUiSmallMarginTop sapUiSmallMarginBegin"/>-->
+							<!--<ObjectIdentifier title="{ServicesViewModel>Material}" titleActive="false"-->
+							<!--	class="sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginEnd"/>-->
+							<Title text="{ServicesViewModel>Material}" wrapping="true"
+								class="Cl_MaterialTitleColor sapUiSmallMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+						</HBox>
+						<ObjectNumber number="{ServicesViewModel>Total}" numberUnit="AED" state="Information"
+							class="Cl_AmountText sapUiSmallMarginTop sapUiSmallMarginEnd"/>
+						<!--<Button icon="sap-icon://delete" type="Emphasized" tooltip="Close" press="onCloseCart" class="sapUiTinyMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd"/>-->
+					</HBox>
+					<HBox alignItems="Start" justifyContent="SpaceBetween">
+						<HBox>
+							<Title text="{ServicesViewModel>MaterialName}" wrapping="true"
+								class="Cl_MaterialTitleColor sapUiTinyMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd"/>
+						</HBox>
+						<VBox>
+							<ObjectStatus title="Qty" text="{ServicesViewModel>Quantity}" state="Error"
+								class="Cl_HeaderField sapUiTinyMarginBegin  sapUiSmallMarginEnd"/>
+							<ObjectStatus title="Net" text="{ServicesViewModel>Price}" state="Error"
+								class="Cl_HeaderField sapUiTinyMarginBegin sapUiTinyMarginTopBottom sapUiSmallMarginEnd"/>
+							<ObjectStatus title="Tax" text="{ServicesViewModel>Tax}" state="Error" class="Cl_HeaderField sapUiTinyMarginBegin sapUiSmallMarginEnd"/>
+						</VBox>
+					</HBox>
+					<HBox alignItems="Start" justifyContent="SpaceBetween" visible="false">
+						<VBox>
+							<!--<Title text="{ServicesViewModel>MaterialName}" wrapping="true" class="sapUiTinyMarginTopBottom sapUiSmallMarginBegin sapUiTinyMarginEnd"/>-->
+							<StepInput class="sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginBottom" value="1" displayValuePrecision="{displayValuePrecision}"
+								min="1" max="999" width="60px" step="{step}" largerStep="{largerStep}" stepMode="{stepMode}" valueState="{valueState}" enabled="false"
+								editable="{editable}" description="{description}" fieldWidth="{fieldWidth}" textAlign="{textAlign}" validationMode="{validationMode}"
+								change="onChange"/>
+						</VBox>
+						<!--<VBox>-->
+						<!--	<ObjectStatus title="Net" text="{ServicesViewModel>Price}" state="Error"-->
+						<!--		class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom sapUiSmallMarginEnd"/>-->
+						<!--	<ObjectStatus title="Tax" text="{ServicesViewModel>Tax}" state="Error" class="sapUiTinyMarginBegin sapUiSmallMarginEnd"/>-->
+						<!--</VBox>-->
+					</HBox>
+				</CustomListItem>
+			</List>
+			<!--<FlexBox height="auto" alignItems="Start" justifyContent="Center" class="sapUiSmallMarginTopBottom">-->
+			<!--	<items>-->
+			<!--		<Image height="2.5rem" width="auto" src="{imageModel>/path}/image/Car.png" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom"/>-->
+			<!--<Text text="Plate Number" class="sapUiTinyMarginBeginEnd sapUiTinyMarginTop"/>-->
+			<!--		<Input value="{oGlobalModel>/Profile_PlateNo}" placeholder="Plate No" valueState="Information" valueStateText="Enter Plate No"-->
+			<!--			class="sapUiTinyMarginBeginEnd sapUiSmallMarginTopBottom" editable="false"/>-->
+			<!--		<Input value="{oGlobalModel>/Profile_PlateCode}" placeholder="Plate Code" valueState="Information" valueStateText="Enter Plate Code" width="80%"-->
+			<!--			class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom sapUiTinyMarginEnd" editable="false"/>-->
+			<!--	</items>-->
+			<!--</FlexBox>-->
+			<fGrid:GridList headerText="Identify Customer" visible="false">
+				<fGrid:GridListItem class="Cl_Identify sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" press="onPressCheckCard" type="Active"
+					height="auto">
+					<VBox>
+						<layoutData>
+							<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+						<HBox alignItems="Start" justifyContent="Start">
+							<Image height="2rem" src="{imageModel>/path}/image/qr.png" class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"/>
+							<Title text="Scan Mobile QR Code" wrapping="true"
+								class="Cl_IdentifyTitle sapUiSmallMarginTop sapUiSmallMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom"/>
+							<!--<Title text="{oGlobalModel>/Global_SaleOrder}" wrapping="true" class="Cl_QuickLinkBox sapUiTinyMarginTop sapUiSmallMarginBegin"/>-->
+						</HBox>
+					</VBox>
+				</fGrid:GridListItem>
+				<fGrid:GridListItem class="Cl_Identify sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" press="onPressContinueguest" type="Active"
+					height="auto">
+					<VBox>
+						<layoutData>
+							<FlexItemData growFactor="1" shrinkFactor="0"/><!-- Don't shrink below minimum size. Fill space if available. --></layoutData>
+						<HBox alignItems="Start" justifyContent="Start">
+							<Image height="2rem" src="{imageModel>/path}/image/Skip.png" class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"/>
+							<Title text="Skip and Continue as a guest" wrapping="true"
+								class="Cl_IdentifyTitle sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginEnd sapUiTinyMarginTopBottom"/>
+							<!--<Title text="{oGlobalModel>/Global_SaleOrder}" wrapping="true" class="Cl_QuickLinkBox sapUiTinyMarginTop sapUiSmallMarginBegin"/>-->
+						</HBox>
+					</VBox>
+				</fGrid:GridListItem>
+			</fGrid:GridList>
+			<!--<fGrid:GridListItem class="cl_Materialgridlist sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" press="onPressSalesorder" type="None"-->
+			<!--	height="auto" visible="{ServicesViewModel>/GuestUsertVisible}">-->
+			<!--	<HBox>-->
+			<!--		<Image height="1.5rem" src="{imageModel>/path}/image/ProfileUser.png" class="sapUiSmallMarginTop sapUiSmallMarginBegin"/>-->
+			<!--		<Title text="Guest User" wrapping="true" class="sapUiSmallMarginTop sapUiTinyMarginBegin sapUiTinyMarginEnd "/>-->
+			<!--	</HBox>-->
+			<!--	<HBox>-->
+			<!--		<Text text="XXXX" class="sapUiTinyMarginBottom sapUiTinyMarginBegin"/>-->
+			<!--		<Text text="XXXX" class="sapUiTinyMarginBottom sapUiTinyMarginBegin"/>-->
+			<!--	</HBox>-->
+			<!--<MessageStrip text="Total : 50 AED" type="Success" showIcon="true" visible="{ServicesViewModel>/GuestUsertVisible}"-->
+			<!--	class="Cl_MessageStrip sapUiTinyMarginTopBottom sapUiTinyMarginBeginEnd"></MessageStrip>-->
+			<!--</fGrid:GridListItem>-->
+			<!--Payment-->
+			<Title level="H3" text="Payment" class="cl_WelcomeText sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+				visible="{ServicesViewModel>/MOPVisible}"/>
+			<!--Cash MOP-->
+			<Panel visible="{ServicesViewModel>/MOPVisible}" tickyHeader="true" expandable="true" expand="onExpandCash"
+				expanded="{ServicesViewModel>/CashMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true">
+				<headerToolbar>
+					<OverflowToolbar height="3rem" style="Clear">
+						<Image height="1.5rem"/>
+						<Title text="Cash"/>
+						<ToolbarSpacer/>
+						<CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Cash_CheckBoxSeleted}"
+							select="onPressCashSelect"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<content>
+					<f:Form editable="true" visible="{PaymentServicesViewModel>/Cash_MOPForm}">
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Cash">
+										<f:fields>
+											<Input value="{ServicesViewModel>/Cashamount}" placeholder="Enter Amount" valueState="Information"></Input>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</content>
+			</Panel>
+
+<!-- Card Mop -->
+	
+<Panel visible="{ServicesViewModel>/MOPVisible}" expandable="true" expand="onExpandCard" expanded="{ServicesViewModel>/CardMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true">
+				<headerToolbar>
+					<OverflowToolbar height="3rem">
+						<Image height="1.5rem"/>
+						<Title text="Card"/>
+						<ToolbarSpacer/>
+						<CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Card_CheckBoxSeleted}"
+							select="onPressCardSelect"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<content>
+					<f:Form editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Card">
+										<f:fields>
+											<Input value="{ServicesViewModel>/CardAmount}" placeholder="Amount" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+											<Input editable="false" value="{ServicesViewModel>/Authcode}" placeholder="Coupon No" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</content>
+			</Panel>
+			<!--Loyalty MOP-->
+			<Panel visible="{ServicesViewModel>/MOPVisible}" tickyHeader="true" expandable="true" expand="onExpandLoyalty"
+				expanded="{ServicesViewModel>/LoyaltyMOPPanelExpand}" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true">
+				<headerToolbar>
+					<OverflowToolbar height="3rem" style="Clear">
+						<Image height="1.5rem" />
+						<Title text="Loyalty"/>
+						<ToolbarSpacer/>
+						<CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Loyalty_CheckBoxSeleted}"
+							select="onPressLoyaltySelect"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<content>
+					<!--<ObjectStatus title="Loyalty Id" text="500000017" state="Information" active="true" press="onPressCheckCard"-->
+					<!--	class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" icon="sap-icon://bar-code"/>-->
+					<!--<FlexBox alignItems="Start" justifyContent="SpaceBetween">-->
+					<HBox>
+						<ObjectStatus title="Loyalty Id" text="500000017" state="Information" active="true" press="onPressCheckCard"
+							class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" icon="sap-icon://bar-code"/>
+						<ObjectStatus title="Points / Amount" text="100 / 20.00" state="Information" active="true" press="onPressCheckCard"
+							class="sapUiTinyMarginBeginEnd sapUiTinyMarginTopBottom" icon="sap-icon://business-card"/>
+						<!--<ndc:BarcodeScannerButton id="sampleBarcodeScannerButton" scanSuccess="onScanSuccess" scanFail="onScanError"-->
+						<!--				inputLiveUpdate="onScanLiveupdate" class="sapUiTinyMarginBegin"/>-->
+						<!--<Link text="Loyalty Scan" class="sapUiSmallMarginEnd" press="onPressCheckCard"/>-->
+					</HBox>
+					<!--</FlexBox>-->
+					<f:Form editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Loyalty Card">
+										<f:fields>
+											<Input value="{ServicesViewModel>/Loyaltyamount}" placeholder="Amount" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+											<Input value="{ServicesViewModel>/LoyaltyRef}" placeholder="Reference" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+											<Button text="Check" type="Emphasized" press="onPressPayCard">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Button>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</content>
+			</Panel>
+
+			<!-- Coupon MOP -->
+				<Panel visible="{ServicesViewModel>/MOPVisible}" expandable="true" expand="onExpandCoupon" expanded="false" width="auto" class="sapUiTinyMarginBeginEnd" expandAnimation="true">
+				<headerToolbar>
+					<OverflowToolbar height="3rem">
+						<Image height="1.5rem" />
+						<Title text="Coupon"/>
+						<ToolbarSpacer/>
+						<CheckBox text="" valueState="Information" enabled="true" selected="{ServicesViewModel>/Coupon_CheckBoxSeleted}"
+							select="onPressLoyaltySelect"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<content>
+					<f:Form editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
+								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Coupon">
+										<f:fields>
+											<Input value="{ServicesViewModel>/CouponAmount}" placeholder="Amount" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+											<Input value="{ServicesViewModel>/CouponNumber}" placeholder="Coupon No" valueState="Information">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Input>
+											<Button text="Check" type="Emphasized" press="onPressPayCard">
+												<layoutData>
+													<l:GridData span="XL1 L2 M2 S4"/>
+												</layoutData>
+											</Button>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</content>
+			</Panel>
+		</content>
+		<buttons>
+			<!--<Button text="Nav 1" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/ProceedSOButtomVisible}"-->
+			<!--	iconDensityAware="false" press="onPressNav1" class="sapUiTinyMarginEnd" icon='sap-icon://accept'/>-->
+			<!--<Button text="Nav 2" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/ProceedSOButtomVisible}"-->
+			<!--iconDensityAware="false" press="onPressNav1" class="sapUiTinyMarginEnd" icon='sap-icon://accept'/>-->
+			<Button text="Proceed to Sale" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/ProceedSOButtomVisible}"
+				iconDensityAware="false" press="onPressProceedSale" class="sapUiTinyMarginEnd" />
+			<!--<Button text="Identify" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/IdenifymButtomVisible}"-->
+			<!--	iconDensityAware="false" press="onPressIdentify" class="sapUiTinyMarginEnd" icon='sap-icon://employee-lookup'/>-->
+			<Button text="Payment" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/PaymentButtomVisible}"
+				iconDensityAware="false" press="onPresspayment" class="sapUiTinyMarginEnd" />
+			<Button text="Read" press="ongetSOdetails" visible="false"/>
+			
+			<!--<Button text="Cancel" type="Default" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="onPressCancelCustomer"-->
+			<!--	class="sapUiTinyMarginEnd" icon='sap-icon://sys-cancel'/>-->
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

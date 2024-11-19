@@ -1,0 +1,138 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified">
+	<Dialog contentHeight="auto" contentWidth="auto" class="Page_BC PageHead sapUiSizeCompact" afterClose="dialogAfterclose"
+		title="Create New Customer/Vechicle Master" titleAlignment="Center" escapeHandler=".handleEscape">
+		<customHeader>
+			<Bar>
+				<contentLeft></contentLeft>
+				<contentMiddle>
+					<Label design="Bold" text="Create Customer / Vehicle" class="PageHead"/>
+				</contentMiddle>
+				<contentRight>
+					<!--<Button press="onRefreshProcess" icon="sap-icon://edit" visible=></Button>-->
+					<Button press="onResetForm" icon="sap-icon://reset"></Button>
+				</contentRight>
+			</Bar>
+		</customHeader>
+		<content class="sapUiSizeCompact">
+			<form:Form editable="true" class="Cl_CCFormLabelColor">
+				<!--<f:title>-->
+				<!--	<core:Title text="Customer No: {EditCustomerModel>/HeaderCustomerNo}"/>-->
+				<!--</f:title>-->
+				<form:layout>
+					<f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0"
+						emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+				</form:layout>
+				<form:formContainers>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Create Customer" wrapping="true" visible="{HomeViewModel>/CNC_CustomerForm}">
+								<form:fields>
+									<Switch type="AcceptReject" state="{HomeViewModel>/CNC_NewCustomer}" customTextOn="Yes" customTextOff="No" enabled="true"
+										change="onCNCSwitchOn">
+										
+									</Switch>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Emirates" visible="{HomeViewModel>/CNC_VehicleForm}">
+								<form:fields>
+									<ComboBox value="{oViewModel>/CC_Emirates}" required="true" placeholder="Select Emirates"
+										items="{ path: 'oViewModel>/EmiratesF4', sorter: { path: 'text' } }">
+										<core:Item key="{oViewModel>Emirates}" text="{oViewModel>Emirates}"/>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Plate Category" visible="{HomeViewModel>/CNC_VehicleForm}" >
+								<form:fields>
+									<ComboBox value="{oViewModel>/CC_Category}" required="true" placeholder="Plate Category"
+										items="{ path: 'oViewModel>/PlateCategoryF4', sorter: { path: 'text' } }">
+										<core:Item key="{oViewModel>Category}" text="{oViewModel>Category}"/>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Plate Code" visible="{HomeViewModel>/CNC_VehicleForm}" >
+								<form:fields>
+									<ComboBox value="{oViewModel>/CC_PlateCode}" required="true" placeholder="Plate Code"
+										items="{ path: 'oViewModel>/PlateCodeF4', sorter: { path: 'text' } }">
+										<core:Item key="{oViewModel>PlateCode}" text="{oViewModel>PlateCode}"/>
+									</ComboBox>
+									<!--<Input value="{EditCustomerModel>/EC_PlateCode}" required="true"></Input>-->
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Plate No" visible="{HomeViewModel>/CNC_VehicleForm}" >
+								<form:fields>
+									<Input value="{oViewModel>/CC_PlateNo}" required="true" placeholder="Enter Plate No" liveChange="onPlateNoInputLiveChange" type="Text"
+										maxLength="5"/>
+								</form:fields>
+							</form:FormElement>
+							<!--<form:FormElement label="VIN NO">-->
+							<!--	<form:fields>-->
+							<!--		<Input value="{oViewModel>/CC_VINNo}" placeholder="Enter VIN No" liveChange="onVINInputLiveChange" type="Text" maxLength="17" />-->
+							<!--	</form:fields>-->
+							<!--</form:FormElement>-->
+						</form:formElements>
+					</form:FormContainer>
+					<form:FormContainer>
+						<form:formElements>
+							<form:FormElement label="Manufacturer" visible="{HomeViewModel>/CNC_VehicleForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{oViewModel>/CC_Manfacturer}" editable="true" valueHelpRequest="onOpenManufactureF4" showSuggestion="true"
+										liveChange="onPoNumberInput" suggestionItemSelected="onPonumberConfirm" showValueHelp="true" class="sapUiSmallMarginEnd"
+										valueHelpOnly="true" placeholder="Select Manfacturer" required="true" valueStateText="Select Manfacturer"></Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Model" visible="{HomeViewModel>/CNC_VehicleForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{oViewModel>/CC_Model}" editable="true" valueHelpRequest="onOpenModelF4" showSuggestion="true" showValueHelp="true"
+										class="sapUiSmallMarginEnd" valueHelpOnly="true" placeholder="Select Model" required="true" valueStateText="Select Model"></Input>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Car Type" visible="{HomeViewModel>/CNC_VehicleForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<ComboBox value="{oViewModel>/CC_CarType}" placeholder="Select Type">
+										<core:Item key="SUV" text="SUV"/>
+										<core:Item key="SEDAN" text="SEDAN"/>
+									</ComboBox>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Customer Name" visible="{HomeViewModel>/CNC_CustomerForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{oViewModel>/CC_FirstName}" required="false" placeholder="Enter First Name" maxLength="40" type="Text"
+										valueState="{oViewModel>/CC_FirstName_ValueState}" valueStateText="Enter First Name" liveChange="onFirstNameLiveChange"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Mobile" visible="{HomeViewModel>/CNC_CustomerForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{oViewModel>/CC_MobileNo}" required="false" placeholder="Enter Mobile No" type="Tel" maxLength="10"
+										valueState="{oViewModel>/CC_MobileNo_ValueState}" valueStateText="Enter 10 Digit Mobile No" liveChange="onMobileNoLiveChange"/>
+								</form:fields>
+							</form:FormElement>
+							<form:FormElement label="Email" visible="{HomeViewModel>/CNC_CustomerForm}" class="Cl_CCFormLabelColor">
+								<form:fields>
+									<Input value="{oViewModel>/CC_Email}" placeholder="Enter Email" maxLength="40"/>
+								</form:fields>
+							</form:FormElement>
+							<!--<form:FormElement label="Fuel type">-->
+							<!--	<form:fields>-->
+							<!--	<ComboBox value="{oViewModel>/CC_FuelType}" selectionChange="onChangeManufacture" placeholder="Select Type"-->
+							<!--			items="{ path: 'oViewModel>/FuelTypeF4', sorter: { path: 'text' } }">-->
+							<!--			<core:Item key="{oViewModel>FuelType}" text="{oViewModel>FuelType}"/>-->
+							<!--		</ComboBox>-->
+							<!--	</form:fields>-->
+							<!--</form:FormElement>-->
+							<!--<form:FormElement label="Year">-->
+							<!--	<form:fields>-->
+							<!--		<DatePicker value="{oViewModel>/CC_Year}" displayFormat="yyyy" change="handleChange" class="sapUiSmallMarginBottom"/>-->
+							<!--	</form:fields>-->
+							<!--</form:FormElement>-->
+						</form:formElements>
+					</form:FormContainer>
+				</form:formContainers>
+			</form:Form>
+		</content>
+		<buttons>
+			<Button text="Create" type="Emphasized" press="onPressSaveCustomer" class="cl_Emphasizebtn"></Button>
+			<Button text="Close" type="Reject" press="onCancelCreateCustomer" class="cl_Rejectbtn"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

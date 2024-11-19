@@ -1,0 +1,7 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<SelectDialog id="id_PlantF4" title="Choose Site" titleAlignment="Center" search="onSearchPlantF4" confirm=".onPlantConfirm" cancel=".onClosePlant" 
+		items="{oGlobalModel>/PlantF4Nav}" rememberSelections="false" class="Cl_PlantFragmentTitleText sapUiSizeCompact" liveChange="onSearchPlantF4" growingThreshold="26">
+		<StandardListItem title="{oGlobalModel>WERKS}" description="{oGlobalModel>NAME1}" icon="{imageModel>/path}/image/New_CarIcon.png"
+			iconDensityAware="true" iconInset="false" adaptTitleSize="true" class="Cl_PlantFragmentTitleText"/>
+	</SelectDialog>
+</core:FragmentDefinition>

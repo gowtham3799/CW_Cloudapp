@@ -1,0 +1,182 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
+	xmlns:layout="sap.ui.layout" xmlns:f="sap.f" xmlns:g="sap.f" xmlns:fb="sap.ui.comp.filterbar" xmlns:cssgrid="sap.ui.layout.cssgrid"
+	xmlns:grid="sap.ui.layout.cssgrid" xmlns:form="sap.ui.layout.form" xmlns:card="sap.f.cards">
+	<Dialog contentHeight="auto" contentWidth="30%" class="Cl_SearchCusFormLabel sapUiSizeCompact" afterClose="dialogAfterclose"
+		title="Vehicle / Customer " titleAlignment="Center" showHeader="true">
+		<!--<VBox>-->
+		<!--	<Text text="Invoice Number: {IdentifyCustomerModel>/HeaderInvoice}" class="sapUiSmallMarginBegin cl_invoicetxt"></Text>-->
+		<!--	<ObjectStatus text="Total Price: {IdentifyCustomerModel>/HeaderAmt} AED" inverted="true" active="true"-->
+		<!--		class="sapUiSmallMarginBegin sapUiSmallMarginTop" state="Information"/>-->
+		<!--</VBox>-->
+		<content class="sapUiSizeCompact">
+			<!--<f:GridList >-->
+			<!--	<f:customLayout>-->
+			<!--		<grid:GridBoxLayout boxWidth="auto"/>-->
+			<!--	</f:customLayout>-->
+			<f:GridListItem >
+				<!--<VBox height="100%" justifyContent="SpaceBetween">-->
+				<!--	<layoutData>-->
+				<!--		<FlexItemData growFactor="1" shrinkFactor="0"/></layoutData>-->
+				<form:Form editable="true" visible="{oGlobalModel>/Filtersbar}" class="Cl_SearchCusFormLabel">
+					<form:layout>
+						<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+							emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+					</form:layout>
+					<form:formContainers>
+						<form:FormContainer>
+							<form:formElements>
+								<form:FormElement label="Plate Number / Code" visible="{oGlobalModel>/CW_ProcessVisible}">
+									<form:fields>
+										<HBox>
+											<Input value="{oGlobalModel>/Chassisno}" placeholder="Plate Number" width="95%" class="" valueState="Information"
+												valueStateText="Enter Plate Number" maxLength="5"/>
+											<Input value="{oGlobalModel>/Platecode}" placeholder="Plate Code" width="91%" class="" valueState="Information"
+												valueStateText="Enter Plate Code"/>
+										</HBox>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Mobile Number" class="Cl_SearchCusFormLabel">
+									<form:fields>
+										<Input value="{CreateCustomerModel>/Engineno}" width="95%" placeholder="Enter Mobile Number"
+											editable="{CreateCustomerModel>/SearchFieldEditable}" valueState="Information" valueStateText="Enter Mobile Number"/>
+									</form:fields>
+								</form:FormElement>
+								<form:FormElement label="Name" visible="{oGlobalModel>/LPG_ProcessVisible}" class="Cl_SearchCusFormLabel">
+									<form:fields>
+										<Input value="{CreateCustomerModel>/CV_Manufacturer}" editable="{CreateCustomerModel>/SearchFieldEditable}" showValueHelp="true"
+											valueHelpOnly="true" valueHelpRequest="openManufacturerF4" valueState="Information" valueStateText="Enter Name" placeholder="Enter Name"/>
+									</form:fields>
+								</form:FormElement>
+							</form:formElements>
+						</form:FormContainer>
+					</form:formContainers>
+				</form:Form>
+				<FlexBox alignItems="Start" justifyContent="End" class="sapUiTinyMarginBottom">
+					<Button text="Go" type="Emphasized" press="onGopress" class="cl_Emphasizebtn sapUiTinyMarginEnd"/>
+					<Button text="Clear" type="Reject" class="cl_Rejectbtn sapUiTinyMarginEnd"/>
+				</FlexBox>
+				<!--		<OverflowToolbar design="Transparent" class="sapUiTinyMarginTopBottom">-->
+				<!--	<ToolbarSpacer/>-->
+				<!--	<Button text="Go" icon="sap-icon://inspection" type="Emphasized" press="onGopress"/>-->
+				<!--	<Button text="Clear" icon="sap-icon://reset" type="Transparent"/>-->
+				<!--</OverflowToolbar>-->
+				<!--</VBox>-->
+			</f:GridListItem>
+			<!--</f:GridList>-->
+			<fb:FilterBar reset="onReset" search="onGopress" cancel="onCancel" clear="Clearpress" useToolbar="false" showGoOnFB="true"
+				showClearOnFB="true" showRestoreOnFB="false" showClearButton="true" showRestoreButton="true" visible="false" class="Cl_FilterbarText"
+				showFilterConfiguration="false" header="true">
+				<fb:filterItems>
+					<fb:FilterItem name="A" label="Plate No">
+						<fb:control>
+							<Input value="" placeholder="Enter Plate No" type="Text" showValueHelp="false" valueState="Information" enabled="true" visible="true"
+								width="70%" valueHelpOnly="false" required="false" valueStateText="Enter Plate No" maxLength="0" valueHelpRequest="technicalselect"/>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="B" label="Plate Code">
+						<fb:control>
+							<Input value="" placeholder="Enter Plate Code" type="Text" showValueHelp="false" valueState="Information" enabled="true" visible="true"
+								width="70%" valueHelpOnly="false" required="false" valueStateText="Enter Plate Code" maxLength="0" valueHelpRequest="technicalselect"/>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="C" label="Name" visible="false">
+						<fb:control>
+							<Input value="" placeholder="Enter Name" type="Text" showValueHelp="false" valueState="Information" enabled="true" visible="true"
+								width="70%" valueHelpOnly="false" required="false" valueStateText="Enter Name" maxLength="0" valueHelpRequest="technicalselect"/>
+						</fb:control>
+					</fb:FilterItem>
+					<fb:FilterItem name="D" label="Mobile No">
+						<fb:control>
+							<Input value="" placeholder="Enter Mobile" type="Text" showValueHelp="false" valueState="Information" enabled="true" visible="true"
+								width="70%" valueHelpOnly="false" required="false" valueStateText="Enter Mobile" maxLength="0" valueHelpRequest="technicalselect"/>
+						</fb:control>
+					</fb:FilterItem>
+				</fb:filterItems>
+			</fb:FilterBar>
+			<f:GridList mode="None" items="{SearchViewModel>/SearchList}" class="Cl_SearchList sapUiSmallMarginTop">
+				<f:headerToolbar>
+					<Toolbar>
+						<content>
+							<!--<Button icon="{imageModel>/path}/image/cart.png" type="Default" press="onPressAddonMaterial"/>-->
+							<SearchField liveChange="onSearchNewMaterialF4" class="sapUiTinyMarginEnd" valueState="Information"/>
+							<!--<Button icon="{imageModel>/path}/image/undo.png" type="Default" press="onResetCarwash"/>-->
+						</content>
+					</Toolbar>
+				</f:headerToolbar>
+				<f:customLayout>
+					<grid:GridBasicLayout gridTemplateColumns="repeat(auto-fit, minmax(16rem, 1fr))" gridGap="0.5rem"/>
+				</f:customLayout>
+				<SearchField/>
+				<f:GridListItem press="onSelectCustomer" highlight="{SearchViewModel>Highlight}" type="{SearchViewModel>Type}"
+					class="sapUiTinyMarginBeginEnd Cl_SearchList">
+					<VBox height="100%">
+						<HBox height="100%" class="sapUiSmallMargin" alignItems="Center" visible="{= ${onlyImage} ? false : true }">
+							<!--<Image src="{ProductPicUrl}" width="3rem" class="sapUiSmallMarginEnd"/>-->
+							<VBox>
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<Image height="2.5rem" width="auto" src="{imageModel>/path}/image/Man-in-suit.png" class="sapUiSmallMarginEnd"/>-->
+									<VBox>
+										<ObjectIdentifier title="{SearchViewModel>BP} {SearchViewModel>BPType}" titleActive="true" class="Cl_SearchListText"/>
+										<ObjectAttribute text="{SearchViewModel>Name}" active='false' class="Cl_SearchListText"/>
+									</VBox>
+								</HBox>
+								<HBox class="sapUiTinyMarginBegin" >
+									<!--<core:Icon src="sap-icon://call" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="{SearchViewModel>Mobile}" active='false' class="Cl_SearchListText" press="onPressWhatsup"/>
+								</HBox>
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<core:Icon src="sap-icon://email" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="{SearchViewModel>Email}" active='false' class="Cl_SearchListText"/>
+								</HBox>
+								<!--<HBox class="sapUiTinyMarginBegin">-->
+								<!--	<Image height="2.5rem" width="auto" src="{imageModel>/path}/image/CarIcon1.png" class="sapUiTinyMarginEnd"/>-->
+								<!--	<Text text="Vehicle Details" class="sapUiTinyMarginTop"/>-->
+								<!--</HBox>-->
+								<Text text="Vehicle Details" class="Cl_SearchListText sapUiTinyMarginTopBottom sapUiTinyMarginBegin"/>
+								<HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBegin">
+									<HBox>
+										<!--<core:Icon src="sap-icon://insurance-car" class="size4" color="#1C4C98"></core:Icon>-->
+										<ObjectAttribute title="Plate / Code" text="{SearchViewModel>PlateNo}-{SearchViewModel>PlateCode}" active='false'
+											class="Cl_SearchListText"/>
+										<!--	<ObjectStatus title="Plate Details" text="{SearchViewModel>/PlateNo} {SearchViewModel>/PlateCode}" state="Information"-->
+										<!--class="Cl_HeaderField"/>-->
+									</HBox>
+									<!--<HBox>-->
+									<!--<core:Icon src="sap-icon://flag" class="size4 sapUiTinyMarginTop sapUiSmallMarginBegin" color="#1C4C98"></core:Icon>-->
+									<!--<tnt:InfoLabel text="{SearchViewModel>Emirates}" colorScheme="7" class="sapUiTinyMarginTop sapUiSmallMarginBegin" icon="sap-icon://map-fill"/>-->
+									<!--<ObjectAttribute text="{SearchViewModel>Emirates}" active='false' class="sapUiTinyMarginTop sapUiSmallMarginBegin"/>-->
+									<!--</HBox>-->
+								</HBox>
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<core:Icon src="sap-icon://car-rental" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="Category: {SearchViewModel>PlateCat}" active='false' class="Cl_SearchListText"/>
+								</HBox>
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<core:Icon src="sap-icon://flag" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<!--<core:Icon src="sap-icon://flag-2" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="Emirates: {SearchViewModel>Emirates}" active='false' class="Cl_SearchListText"/>
+								</HBox>
+								<!--<HBox class="sapUiTinyMarginBegin">-->
+								<!--	<core:Icon src="sap-icon://flag-2" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+								<!--	<ObjectAttribute text="Emirates: {SearchViewModel>Emirates}" active='false'/>-->
+								<!--</HBox>-->
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<core:Icon src="sap-icon://badge" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="Model: {SearchViewModel>Model} / {SearchViewModel>CarType}" active='false' class="Cl_SearchListText"/>
+								</HBox>
+								<HBox class="sapUiTinyMarginBegin">
+									<!--<core:Icon src="sap-icon://taxi" class="size4 sapUiTinyMarginEnd" color="#1C4C98"></core:Icon>-->
+									<ObjectAttribute text="VIN: {SearchViewModel>VinNo}" active='false' class="Cl_SearchListText"/>
+								</HBox>
+							</VBox>
+						</HBox>
+					</VBox>
+				</f:GridListItem>
+			</f:GridList>
+		</content>
+		<buttons>
+			<!--<Button text="Create" type="Emphasized" press="onPressCreateCustomer" class="cl_Emphasizebtn"/>-->
+			<Button text="Close" type="Reject" press="onPressCloseSearch" class="cl_Rejectbtn"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

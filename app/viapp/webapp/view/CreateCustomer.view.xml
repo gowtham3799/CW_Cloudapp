@@ -1,0 +1,164 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="viapp.controller.CreateCustomer"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:grid="sap.ui.layout.cssgrid" xmlns:layout="sap.ui.layout"
+	xmlns:f="sap.f" xmlns:form="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page id="page2" title="{i18n>title}" showHeader="false" class="Cl_PageBG sapUiSizeCompact" showFooter="true">
+				<l:VerticalLayout width="100%">
+					<l:BlockLayout background="Dashboard">
+						<l:BlockLayoutRow accentCells="Accent1">
+							<!--<l:BlockLayoutCell width="1" title="Customer Details" level="H5"></l:BlockLayoutCell>-->
+							<l:BlockLayoutCell width="6" class="Cl_BlockLayoutPading">
+								<HBox>
+									<Image height="3rem" width="auto" src="{imageModel>/path}/image/ProfileUser.png" press="onSearchCustomer"/>
+									<ObjectIdentifier title="Customer Details" titleActive="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop"/>
+								</HBox>
+								<form:Form editable="true">
+									<!--<form:title>-->
+									<!--	<core:Title text="Customer"/>-->
+									<!--</form:title>-->
+									<form:layout>
+										<form:ResponsiveGridLayout labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0"
+											emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false"/>
+									</form:layout>
+									<form:formContainers>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement label="First Name">
+													<form:fields>
+														<Input value="{oViewModel>/CC_FirstName}" required="true" placeholder="Enter First Name" maxLength="40" type="Text"
+															valueState="{oViewModel>/CC_FirstName_ValueState}" valueStateText="Enter First Name" liveChange="onFirstNameLiveChange"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="Last Name">
+													<form:fields>
+														<Input value="{oViewModel>/CC_LastName}" placeholder="Enter Last Name" maxLength="40" type="Text"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="Email ID">
+													<form:fields>
+														<Input value="{oViewModel>/CC_Email}" placeholder="Enter Email" maxLength="40"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="Mobile No">
+													<form:fields>
+														<Input value="{oViewModel>/CC_MobileNo}" required="true" placeholder="Enter Mobile No" type="Tel" maxLength="10"
+															valueState="{oViewModel>/CC_MobileNo_ValueState}" valueStateText="Enter 10 Digit Mobile No" liveChange="onMobileNoLiveChange"/>
+													</form:fields>
+												</form:FormElement>
+											</form:formElements>
+										</form:FormContainer>
+										<form:FormContainer>
+											<form:formElements>
+												<form:FormElement label="House No / Street">
+													<form:fields>
+														<Input value="{oViewModel>/CC_HouseNo}" placeholder="Enter House No" maxLength="40" type="Text"/>
+														<Input value="{oMooViewModeldle>/CC_Street}" placeholder="Enter Street" maxLength="40" type="Text"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="City / Postal Code">
+													<form:fields>
+														<Input value="{oViewModel>/CC_City}" placeholder="Enter City" maxLength="40" type="Text"/>
+														<Input value="{oViewModel>/CC_PostalCode}" placeholder="Enter Postal Code" maxLength="40" type="Text"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="Country">
+													<form:fields>
+														<Input value="{oViewModel>/CC_Country}" placeholder="Enter Country" maxLength="40" type="Text"/>
+													</form:fields>
+												</form:FormElement>
+												<form:FormElement label="Remark">
+													<form:fields>
+														<TextArea value="{oViewModel>/CC_Remark}" placeholder="Enter Remarks" maxLength="150" type="Text"/>
+													</form:fields>
+												</form:FormElement>
+												<!--<form:FormElement label="Add Vehicle">-->
+												<!--	<form:fields>-->
+												<!--		<Switch type="AcceptReject" state="{oViewModel>/CC_AddVehicleSwitch}" enabled="true" change="onSwitchAddVehicle">-->
+												<!--			<layoutData>-->
+												<!--				<FlexItemData growFactor="1"/>-->
+												<!--			</layoutData>-->
+												<!--		</Switch>-->
+												<!--	</form:fields>-->
+												<!--</form:FormElement>-->
+											</form:formElements>
+										</form:FormContainer>
+									</form:formContainers>
+								</form:Form>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+						<l:BlockLayoutRow accentCells="Accent3">
+							<l:BlockLayoutCell class="Cl_BlockLayoutPading">
+								<HBox>
+									<Image height="3rem" width="auto" src="{imageModel>/path}/image/VehicleIcon.png"/>
+									<ObjectIdentifier title="Vehicle Details" titleActive="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop"/>
+									<Switch type="AcceptReject" state="{oViewModel>/CC_AddVehicleSwitch}" enabled="true" change="onSwitchAddVehicle"
+										class="sapUiLargeMarginBegin sapUiTinyMarginTop">
+										<!--<layoutData>-->
+										<!--	<FlexItemData growFactor="1"/>-->
+										<!--</layoutData>-->
+									</Switch>
+									<ObjectIdentifier title="Add Vehicle" titleActive="false" class="sapUiTinyMarginBegin sapUiSmallMarginTop"/>
+								</HBox>
+								<Table items="{oViewModel>/AddVehicleList}" alternateRowColors="true" class="cl_table" popinLayout="GridSmall" growing="true"
+									growingThreshold="100" growingScrollToLoad="false" sticky="HeaderToolbar,InfoToolbar,ColumnHeaders">
+									<columns>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+											<Text text="Plate No / Code"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+											<Text text="VIN No"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+											<Text text="Manufacturer"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+											<Text text="Model"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="7rem">
+											<Text text="Car Type"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="5rem">
+											<Text text="Fuel Type"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="5rem">
+											<Text text="Year"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true" width="5rem">
+											<Text text="Remove"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier title="{oViewModel>CC_PlateNo} - {oViewModel>CC_PlateCode}" titleActive="true"/>
+												<Text text="{oViewModel>CC_VINNo}"></Text>
+												<Text text="{oViewModel>CC_Manfacturer}"></Text>
+												<Text text="{oViewModel>CC_Model}"></Text>
+												<Text text="{oViewModel>CC_CarType}"></Text>
+												<Text text="{oViewModel>CC_FuelType}" visible="false"></Text>
+												<Text text="{oViewModel>CC_Year}"></Text>
+												<Button type="Reject" icon="sap-icon://delete" press="onPressDelete"></Button>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:BlockLayoutCell>
+						</l:BlockLayoutRow>
+					</l:BlockLayout>
+				</l:VerticalLayout>
+				<footer>
+					<OverflowToolbar enabled="true" visible="true">
+						<ToolbarSpacer/>
+						<content>
+							<Button text="Create" type="Emphasized" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="onPressSaveCustomer"
+								class="sapUiSmallMarginEnd" icon="sap-icon://create"/>
+							<Button text="Cancel" type="Default" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="onCloseCreateCustomer"
+								class="sapUiSmallMarginEnd" icon="sap-icon://sys-cancel"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
