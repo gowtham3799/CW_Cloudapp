@@ -45,13 +45,16 @@ module.exports = cds.service.impl(async function () {
             field: "ORDERNUM"
         });
 
+        var totalprice = 0.00
         ORDERNUMNEXT = await ORDERNUM.getNextNumber()
         context.data.ORDERNUM = ORDERNUMNEXT
         context.data.ITEMS[ 0 ].ORDERNUM_ID = ORDERNUMNEXT
         var array = context.data.ITEMS
         for (let i = 0; i < array.length; i++) {
             array[i].ORDERNUM_ID = ORDERNUMNEXT;
+            totalprice = array[i].NETPRICE + totalprice;
         }
+        context.data.TOTALPRICE = totalprice;
     })
 
     // this.before("CREATE", Payment, async(context)=>{

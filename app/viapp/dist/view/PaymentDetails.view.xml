@@ -1,51 +1,111 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="viapp.controller.PaymentDetails"
-	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
-	<App>
-		<pages>
-			<Page title="{i18n>title}" showHeader="false" class="Cl_PageBG sapUiSizeCompact" showFooter="true">
-				<content>
-					<f:Form id="FormDisplay354" editable="false">
-						<f:title>
-							<core:Title text="Address"/>
-						</f:title>
-						<f:layout>
-							<f:ResponsiveGridLayout labelSpanXL="3" labelSpanL="3" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4"
-								emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
-						</f:layout>
-						<f:formContainers>
-							<f:FormContainer>
-								<f:formElements>
-									<f:FormElement label="Order">
-										<f:fields>
-											<Text text="{oGlobalModel>/Saleorder}"/>
-										</f:fields>
-									</f:FormElement>
-									<!-- <f:FormElement label="Status">
+<mvc:View
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="viapp.controller.PaymentDetails"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+>
+    <App>
+        <pages>
+            <Page
+                title="{i18n>title}"
+                showHeader="false"
+                class="Cl_PageBG sapUiSizeCompact"
+                showFooter="true"
+            >
+                <content>
+                    <f:Form
+                        id="FormDisplay354"
+                        editable="false"
+                    >
+                        <f:title>
+                            <core:Title text="Address" />
+                        </f:title>
+                        <f:layout>
+                            <f:ResponsiveGridLayout
+                                labelSpanXL="3"
+                                labelSpanL="3"
+                                labelSpanM="3"
+                                labelSpanS="12"
+                                adjustLabelSpan="false"
+                                emptySpanXL="4"
+                                emptySpanL="4"
+                                emptySpanM="4"
+                                emptySpanS="0"
+                                columnsXL="1"
+                                columnsL="1"
+                                columnsM="1"
+                                singleContainerFullSize="false"
+                            />
+                        </f:layout>
+                        <f:formContainers>
+                            <f:FormContainer>
+                                <f:formElements>
+                                    <f:FormElement label="Order">
+                                        <f:fields>
+                                            <Text
+                                                text="{oGlobalModel>/Saleorder}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <!-- <f:FormElement label="Status">
 										<f:fields>
 											<Text text="{oGlobalModel>/Status}"/>
 										</f:fields>
 									</f:FormElement> -->
-									<f:FormElement label="Authcode">
-										<f:fields>
-											<Text text="{oGlobalModel>/Authcode}"/>
-										</f:fields>
-									</f:FormElement>
-									<f:FormElement label="Message">
-										<f:fields>
-											<Text text="{oGlobalModel>/TransactionMessage}"/>
-										</f:fields>
-									</f:FormElement>
-								</f:formElements>
-							</f:FormContainer>
-						</f:formContainers>
-					</f:Form>
-					<FlexBox alignItems="End" justifyContent="End">
-						<Button text="Retry Payment" press="onPressNavtoPaymentapp" type="Default" class="sapUiSmallMarginEnd" icon="sap-icon://money-bills"/>
-						<Button text="Save" press="ongetSOdetails" type="Emphasized" class="sapUiSmallMarginEnd" icon="sap-icon://save"/>
-					<Button text="Remove Key Parameter" press="onRemoveKeyParameter" visible="false"/>
-					</FlexBox>
-				</content>
-			</Page>
-		</pages>
-	</App>
+                                    <f:FormElement label="Authcode">
+                                        <f:fields>
+                                            <Text
+                                                text="{oGlobalModel>/Authcode}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                    <f:FormElement label="Message">
+                                        <f:fields>
+                                            <Text
+                                                text="{oGlobalModel>/TransactionMessage}"
+                                            />
+                                        </f:fields>
+                                    </f:FormElement>
+                                </f:formElements>
+                            </f:FormContainer>
+                        </f:formContainers>
+                    </f:Form>
+                    <FlexBox
+                        alignItems="End"
+                        justifyContent="End"
+                    >
+                        <Button
+                            text="Retry Payment"
+                            press="onPressNavtoPaymentapp"
+                            type="Default"
+                            class="sapUiSmallMarginEnd"
+                            icon="sap-icon://money-bills"
+                        />
+                        <Button
+                            visible="false"
+                            text="Save"
+                            press="ongetSOdetails"
+                            type="Emphasized"
+                            class="sapUiSmallMarginEnd"
+                            icon="sap-icon://save"
+                        />
+                        <Button
+                            text="Print"
+                            type="Emphasized"
+                            class="sapUiSmallMarginEnd"
+                            press="onnewprint"
+                        />
+                        <Button
+                            text="Remove Key Parameter"
+                            press="onRemoveKeyParameter"
+                            visible="false"
+                        />
+                    </FlexBox>
+                </content>
+            </Page>
+        </pages>
+    </App>
 </mvc:View>

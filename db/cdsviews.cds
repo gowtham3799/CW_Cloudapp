@@ -10,20 +10,27 @@ context cdsviews {
             WERKS as ![PLANT],
             NAME1 as ![DESCRIPTION]
         }
-
-    
 }
 
-// define view ![Order]as
-//     select from db.Order{
-//         ID,
-//         OrderNum,
-//         PlateCode,
-//         PlateNum,
-//         Source,
-//         Kind,
-//         Items
-//     }
+define view ![Order]as
+    select from db.Order as Order{
+        *,
+        ITEMS
+    }
+define view ![OrderRead]as
+    select from db.Order as Order
+    inner join db.Payment as Payment on Payment.ORDERNUM = Order.ORDERNUM {
+        key Order.ID,
+        Order.ORDERNUM,
+        Order.PLATECODE,
+        Order.PLATENUM,
+        Order.SOURCE,
+        Order.KIND,
+        Order.TOTALPRICE,
+        Order.CURRENCY,
+        Payment.INVOICE,
+        Order.ITEMS
+    }
 
 //     define view ![OrderItem]as
 //     select from db.OrderItem{

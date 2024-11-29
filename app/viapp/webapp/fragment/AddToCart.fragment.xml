@@ -1,7 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout"
 	xmlns:grid="sap.ui.layout.cssgrid" xmlns:layout="sap.ui.layout" xmlns:table="sap.ui.table" xmlns:m="sap.m" xmlns:fGrid="sap.f"
 	xmlns:f="sap.ui.layout.form" xmlns:ndc="sap.ndc">
-	<Dialog  contentHeight="100%" contentWidth="37%" class="sapUiSizeCompact" afterClose="dialogAfterclose"
+	<Dialog  contentHeight="100%" contentWidth="auto" class="sapUiSizeCompact" afterClose="dialogAfterclose"
 		title="Invoice Details">
 		<customHeader>
 			<Bar>
@@ -327,7 +327,8 @@
 			<!--	iconDensityAware="false" press="onPressIdentify" class="sapUiTinyMarginEnd" icon='sap-icon://employee-lookup'/>-->
 			<Button text="Payment" type="Emphasized" iconFirst="true" width="auto" visible="{ServicesViewModel>/PaymentButtomVisible}"
 				iconDensityAware="false" press="onPresspayment" class="sapUiTinyMarginEnd" />
-			<Button text="Read" press="ongetSOdetails" visible="false"/>
+			<!-- <Button text="Read" press="ongetSOdetails" visible="true"/> -->
+			<!-- <Button type="Emphasized" text="Print" press="onnewprint" visible="{ServicesViewModel>/Printvisible}"/> -->
 			
 			<!--<Button text="Cancel" type="Default" iconFirst="true" width="auto" visible="true" iconDensityAware="false" press="onPressCancelCustomer"-->
 			<!--	class="sapUiTinyMarginEnd" icon='sap-icon://sys-cancel'/>-->

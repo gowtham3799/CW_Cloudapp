@@ -35,6 +35,8 @@ entity Order : cuid {
         PLATENUM  : String(5);
         SOURCE    : String(20);
         KIND      : String(20);
+        TOTALPRICE: Decimal(11, 2);
+        CURRENCY  : String(5);
         ITEMS     : Composition of many OrderItem
                         on ITEMS.PARENT_KEY = $self;
 
@@ -62,6 +64,7 @@ entity Payment : cuid {
         ORDERNUM    : Integer;
         AMOUNT      : Decimal(11, 2);
         CURRENCY    : String(5);
+        INVOICE     : String(21);
         ITEMS       : Composition of many PaymentItem
                           on ITEMS.PARENT_KEY = $self;
 

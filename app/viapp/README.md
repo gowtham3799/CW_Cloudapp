@@ -1,7 +1,7 @@
 ## Application Details
 |               |
 | ------------- |
-|**Generation Date and Time**<br>Mon Nov 18 2024 11:25:32 GMT+0000 (Coordinated Universal Time)|
+|**Generation Date and Time**<br>Tue Nov 19 2024 09:56:39 GMT+0000 (Coordinated Universal Time)|
 |**App Generator**<br>@sap/generator-fiori-freestyle|
 |**App Generator Version**<br>1.15.5|
 |**Generation Platform**<br>SAP Business Application Studio|
@@ -9,7 +9,7 @@
 |**Service Type**<br>Local Cap|
 |**Service URL**<br>http://localhost:4004/odata/v4/CarwashService/|
 |**Module Name**<br>viapp|
-|**Application Title**<br>Carwash app|
+|**Application Title**<br>App Title|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_fiori_3|
 |**UI5 Version**<br>1.96.25|

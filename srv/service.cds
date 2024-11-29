@@ -17,7 +17,12 @@ service CarwashService @(path:'CarwashService') {
     // entity MaterialPlant as projection on cds.cdsviews.MaterialPlant;
 
     entity OrderItem as projection on db.OrderItem;
-    entity Order as projection on db.Order{
+    entity Order as projection on cds.Order{
+        *,
+        ITEMS: redirected to OrderItem
+    };
+
+    entity OrderRead as projection on cds.OrderRead{
         *,
         ITEMS: redirected to OrderItem
     };

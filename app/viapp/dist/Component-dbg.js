@@ -35,9 +35,8 @@ sap.ui.define([
                     path: oRootPath
                 });
                 this.setModel(oImageModel, "imageModel");
-
-                /*Global Model*/
-                this.setModel(new sap.ui.model.json.JSONModel({
+                 /*Global Model*/
+                 this.setModel(new sap.ui.model.json.JSONModel({
                     "MainPlant": "",
                     "CW_ProcessVisible": false,
                     "LPG_ProcessVisible": false,

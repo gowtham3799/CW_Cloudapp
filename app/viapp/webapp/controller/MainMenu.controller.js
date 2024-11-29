@@ -22,7 +22,7 @@ sap.ui.define([
 		},
 
 		handleRouteMatched: function (oEvent) {
-			if (oEvent.getParameter("name") === "MainMenu") {
+			// if (oEvent.getParameter("name") === "MainMenu") {
 			var oStartupParameters = this.getOwnerComponent().getComponentData().startupParameters;
 			if (oStartupParameters && oStartupParameters.message) {
 				// 		var base64string = oStartupParameters.message;
@@ -46,14 +46,14 @@ sap.ui.define([
 				}
 
 			}
-		}
+		// }
 		},
 
 
 		onAfterRendering: function () {
 			this.oBundle = this.getView().getModel("i18n").getResourceBundle();
 			this._ModelInitialLoad();
-			this.onPressPlant();
+			// this.onPressPlant();
 			// this.getPlantf4();
 		},
 
@@ -69,7 +69,7 @@ sap.ui.define([
 
 		onPressmainHome: function () {
 			// var sPreviousHash = History.getInstance().getPreviousHash();
-			var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+			var oCrossAppNavigator = sap.ushell.Container.getServiceAsync("CrossApplicationNavigation");
 			oCrossAppNavigator.toExternal({
 				target: {
 					shellHash: "#Shell-home"
@@ -311,11 +311,11 @@ sap.ui.define([
 			// 		"")) {
 
 			/*Enable Vehicle Details Input*/
-			if (!this.SearchVehiclef4) {
-				this.SearchVehiclef4 = sap.ui.xmlfragment("viapp.fragment.SearchVehicle", this); // Fragments for Process select
-				this.getView().addDependent(this.SearchVehiclef4);
+			if (!this.SearchVehicleFrag) {
+				this.SearchVehicleFrag = sap.ui.xmlfragment("viapp.fragment.SearchVehicle", this); // Fragments for Process select
+				this.getView().addDependent(this.SearchVehicleFrag);
 			}
-			this.SearchVehiclef4.open();
+			this.SearchVehicleFrag.open();
 
 			// }
 
@@ -325,7 +325,7 @@ sap.ui.define([
 
 		onPressCreateCustomer: function () {
 
-			this.SearchVehicle.close();
+			this.SearchVehicleFrag.close();
 
 			// this._oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			// this._oRouter.navTo("Home", true);
@@ -342,7 +342,7 @@ sap.ui.define([
 		},
 
 		onPressCloseSearch: function () {
-			this.SearchVehiclef4.close();
+			this.SearchVehicleFrag.close();
 		},
 		getPlantf4: function () {
 			this.getView().getModel("CarwashService").read("/Plant", {

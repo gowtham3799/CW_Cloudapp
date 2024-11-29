@@ -3,9 +3,9 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^undefined/(.*)$",
-      "target": "undefined/$1",
-      "destination": "carwash_carwash_html_repo_host",
+      "source": "^/odata/(.*)$",
+      "target": "/odata/$1",
+      "destination": "carwash-srv-api",
       "authenticationType": "xsuaa",
       "csrfProtection": false
     },

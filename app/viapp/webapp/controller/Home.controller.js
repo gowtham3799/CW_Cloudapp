@@ -25,7 +25,7 @@ sap.ui.define([
 
 				var oStartupParameters = this.getOwnerComponent().getComponentData().startupParameters;
 				if (oStartupParameters && oStartupParameters.message) {
-					var base64string = oStartupParameters.message;
+					var base64string = oStartupParameters.message[0];
 					// MessageToast.show(base64string);
 					var decodedstring = atob(base64string);
 					var parsedstring = JSON.parse(decodedstring);
@@ -34,6 +34,8 @@ sap.ui.define([
 					globalModel.Saleorder = parsedstring.txnID;
 					globalModel.Authcode = parsedstring.responseData.APPROVAL_CODE;
 					globalModel.TransactionMessage = parsedstring.responseMsg;
+					globalModel.Cardno = parsedstring.responseData.CARD_NUMBER;
+					globalModel.Cardname = parsedstring.responseData.CARD_NAME;
 					if (globalModel.Saleorder) {
 						this.ongetSOdetails(globalModel.Saleorder);
 					}
@@ -48,7 +50,7 @@ sap.ui.define([
 					// MessageBox.success("Salesorder: " + parsedstring.txnID + "\n" + "Authcode: " + parsedstring.responseData.APPROVAL_CODE + "\n" + "Status: " + "\n" + parsedstring.responseMsg);
 
 					sap.m.MessageBox.success(
-						 "Salesorder: " + parsedstring.txnID + "\n" + "Authcode: " + parsedstring.responseData.APPROVAL_CODE + "\n" + "Card No: " + parsedstring.responseData.CARD_NUMBER + "\n" + "Card Name: " + parsedstring.responseData.CARD_NAME + "\n" + "Status: " + parsedstring.responseMsg, {
+						"Salesorder: " + parsedstring.txnID + "\n" + "Authcode: " + parsedstring.responseData.APPROVAL_CODE + "\n" + "Card No: " + parsedstring.responseData.CARD_NUMBER + "\n" + "Card Name: " + parsedstring.responseData.CARD_NAME + "\n" + "Status: " + parsedstring.responseMsg, {
 						icon: sap.m.MessageBox.Icon.SUCCESS,
 						title: "Success",
 						actions: [sap.m.MessageBox.Action.OK],
@@ -75,8 +77,8 @@ sap.ui.define([
 		},
 		ongetSOdetails: function (SO) {
 			// var so = this.getView().getModel("oGlobalModel").getProperty("/Saleorder");
-			// var vAuthcode = this.getView().getModel("oGlobalModel").getProperty("/Authcode");
-			this.getView().getModel("CarwashService").read("/Order", {
+			var vAuthcode = this.getView().getModel("oGlobalModel").getProperty("/Authcode");
+			this.getView().getModel("CarwashService").read("/OrderRead", {
 				filters: [
 					new Filter("ORDERNUM", FilterOperator.EQ, SO)
 				],
@@ -85,10 +87,26 @@ sap.ui.define([
 				},
 				success: function (oData, oResponse) {
 					// var obj = "";
-					var itemsarr = oData.results[0].ITEMS.results;
-					if (itemsarr.length !== 0) {
-						var plant = itemsarr[0].PLANT;
-						this.getView().getModel("oGlobalModel").setProperty("/MainPlant", plant);
+					if (oData.results.length !== 0) {
+						var itemsarr = oData.results[0].ITEMS.results;
+						// this.getView().getModel("oGlobalModel").setProperty("/NetPrice", oData.results[0].TOTALPRICE);
+						this.getView().getModel("oGlobalModel").setProperty("/ItemARR", itemsarr);
+						this.getView().getModel("oGlobalModel").setProperty("/PlateNo", oData.results[0].PLATENUM);
+						this.getView().getModel("oGlobalModel").setProperty("/PlateCode", oData.results[0].PLATECODE);
+						this.getView().getModel("oGlobalModel").setProperty("/Kind", oData.results[0].KIND);
+						this.getView().getModel("oGlobalModel").setProperty("/Source", oData.results[0].SOURCE);
+						this.getView().getModel("oGlobalModel").setProperty("/INVOICENo", oData.results[0].INVOICE);
+
+						// var vat = parseFloat(oData.results[0].TOTALPRICE) * 0.05;
+						// var Total = parseFloat(vat) + parseFloat(oData.results[0].TOTALPRICE);
+						// this.getView().getModel("oGlobalModel").setProperty("/TOTALPRICE", Total);
+						// this.getView().getModel("oGlobalModel").setProperty("/Vat", vat);
+						this.getView().getModel("oGlobalModel").setProperty("/SOnumber", oData.results[0].ORDERNUM.toString());
+						if (itemsarr.length !== 0) {
+							var plant = itemsarr[0].PLANT;
+							this.getView().getModel("oGlobalModel").setProperty("/MainPlant", plant);
+						}
+						this.getPaymentDetails();
 					}
 				}.bind(this),
 				error: function (oError) {
@@ -96,6 +114,73 @@ sap.ui.define([
 					MessageBox.error(oError.message);
 				}.bind(this)
 			});
+		},
+		getPaymentDetails: function () {
+			var so = this.getView().getModel("oGlobalModel").getProperty("/Saleorder");
+			var vAuthcode = this.getView().getModel("oGlobalModel").getProperty("/Authcode");
+			this.getView().getModel("CarwashService").read("/Payment", {
+				filters: [
+					new Filter("ORDERNUM", FilterOperator.EQ, so)
+				],
+				urlParameters: {
+					$expand: "ITEMS"
+				},
+				success: function (oData, oResponse) {
+					if (oData.results[0].length !== 0) {
+						var obj = "";
+						var itemsarr = oData.results[0].ITEMS.results;
+						this.getView().getModel("oGlobalModel").setProperty("/MOPItems", itemsarr);
+						for (var i = 0; i < itemsarr.length; i++) {
+							if (itemsarr[i].MOP_TYPE === "CARD") {
+								itemsarr[i].AUTH_CODE = vAuthcode;
+								obj = itemsarr[i];
+							}
+						}
+						if (obj) {
+							this.saveDetails(obj);
+						}
+					}
+
+				}.bind(this),
+				error: function (oError) {
+					// BusyIndicator.hide();
+					MessageBox.error(oError.message);
+				}.bind(this)
+			});
+
+		},
+		saveDetails: function (payload) {
+			var obj = {
+				"ID": payload.ID,
+				"PARENT_KEY_ID": payload.PARENT_KEY_ID,
+				"MOP_COUNTER": payload.MOP_COUNTER,
+				"AMOUNT": payload.AMOUNT,
+				"CURRENCY": payload.CURRENCY,
+				"MOP_TYPE": payload.MOP_TYPE,
+				"AUTH_CODE": payload.AUTH_CODE
+			};
+			var oModel = this.getView().getModel("CarwashService");
+			var path = "";
+			path = oModel.createKey("/PaymentItem", {
+				ID: payload.ID
+			});
+
+			oModel.sDefaultUpdateMethod = sap.ui.model.odata.UpdateMethod.Put;
+			oModel.update(path, obj, {
+
+				success: function (oData, oResponse) {
+					if (oData.ID) {
+						sap.m.MessageToast.show("Payment Details Updated successfully");
+						// this.onRemoveKeyParameter();
+					}
+				}.bind(this),
+				error: function (oError) {
+					// BusyIndicator.hide();
+					MessageBox.error(oError.message);
+				}.bind(this)
+			});
+
+
 		},
 		navtopayment: function () {
 			alert("Nav to PaymentDetails")

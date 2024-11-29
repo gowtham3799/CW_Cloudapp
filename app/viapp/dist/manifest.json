@@ -13,11 +13,11 @@
         "sourceTemplate": {
             "id": "@sap/generator-fiori:basic",
             "version": "1.15.5",
-            "toolsId": "f65ab8ff-734f-4e7b-8e75-11e59ae824ec"
+            "toolsId": "db6989a9-28ea-4dfa-934f-0c1f6fa1f97e"
         },
         "dataSources": {
             "CarwashService": {
-                "uri": "odata/v2/CarwashService/",
+                "uri": "odata/v2/CarwashService",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -27,8 +27,8 @@
         },
         "crossNavigation": {
             "inbounds": {
-                "Carwash-display": {
-                    "semanticObject": "Carwash",
+                "CW-display": {
+                    "semanticObject": "CW",
                     "action": "display",
                     "title": "{{flpTitle}}",
                     "signature": {

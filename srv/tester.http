@@ -12,7 +12,7 @@ GET http://localhost:4004/odata/v2/CarwashService/Material_V
 GET http://localhost:4004/odata/v4/CarwashService/Plant
 
 ###Get Top orders
-GET http://localhost:4004/odata/v4/CarwashService/Order?$filter=ORDERNUM eq '2000000524'&$expand=ITEMS
+GET http://localhost:4004/odata/v4/CarwashService/OrderRead?$filter=ORDERNUM eq '2000000524'&$expand=ITEMS
 
 ###Create Order
 POST http://localhost:4004/odata/v4/CarwashService/Order
@@ -87,7 +87,7 @@ Content-Type: application/json
 
 
 ###Create Order
-POST http://localhost:4004/odata/v2/CarwashService/Order
+POST http://localhost:41485/odata/v2/CarwashService/Order
 Content-Type: application/json
 
 {
@@ -107,9 +107,54 @@ Content-Type: application/json
                 "UOM" : "EA",
                 "NETPRICE" : 10.00,
                 "CURRENCY" : "AED"
+            },
+                        {
+                //"OrderNum_ID" : "1000000003",
+                "ITEMNUM" : "2",
+                "MATERIAL" : "13",
+                "PLANT" : "A001",
+                "MATERIALDESC" :  "Test",
+                "QUANTITY" : 1.00,
+                "UOM" : "EA",
+                "NETPRICE" : 12.00,
+                "CURRENCY" : "AED"
             }
         ]
 }
+
+###Create Order
+POST http://localhost:36915/odata/v2/CarwashService/Order
+Content-Type: application/json
+
+{
+    "PLATECODE": "A",
+    "PLATENUM": "66768",
+    "SOURCE": "Dubai",
+    "KIND": "PRIVATE",
+    "ITEMS": [
+        {
+            "ITEMNUM": "10",
+            "MATERIAL": "271",
+            "PLANT": "A002",
+            "MATERIALDESC": "Test Material 1",
+            "QUANTITY": "1.00",
+            "UOM": "EA",
+            "NETPRICE": 10.00,
+            "CURRENCY": "AED"
+        },
+        {
+            "ITEMNUM": "20",
+            "MATERIAL": "281",
+            "PLANT": "A002",
+            "MATERIALDESC": "Wash 2",
+            "QUANTITY": "1.00",
+            "UOM": "EA",
+            "NETPRICE": 15.00,
+            "CURRENCY": "AED"
+        }
+    ]
+}
+
 
 
 ###Get order items
@@ -149,4 +194,4 @@ Content-Type: application/json
 }
 
 ###Get Top orders
-GET http://localhost:4004/odata/v4/CarwashService/Payment?$expand=ITEMS&$filter=ORDERNUM eq '2000000580'
+GET http://localhost:4004/odata/v4/CarwashService/Order?$expand=ITEMS&$filter=ORDERNUM eq '2000000514'
