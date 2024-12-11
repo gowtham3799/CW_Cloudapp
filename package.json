@@ -14,13 +14,17 @@
     "@sap/cds": "^8",
     "@sap/xssec": "^4.2.7",
     "express": "^4",
-    "passport": "^0.7.0"
+    "passport": "^0.7.0",
+    "@sap-cloud-sdk/http-client": "^3.22.1",
+    "@sap-cloud-sdk/resilience": "^3.22.1",
+    "@sap-cloud-sdk/connectivity": "^3.22.1"
   },
   "devDependencies": {
     "@cap-js/cds-types": "^0.7.0",
     "@cap-js/sqlite": "^1",
     "@sap/cds-dk": "^8",
     "rimraf": "^5.0.5"
+    
   },
   "scripts": {
     "start": "cds-serve",
@@ -36,7 +40,16 @@
       "native_hana_associations": false
     },
     "requires": {
-      "auth": "xsuaa"
+      "auth": "xsuaa",
+      "RestAPI":{
+        "kind": "rest",
+        "credentials":{
+          "[hybrid]":{
+          "destination":"Rest_API"
+        }
+      }
     }
+    }
+    
   }
 }

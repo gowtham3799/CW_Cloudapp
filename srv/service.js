@@ -7,6 +7,34 @@ module.exports = cds.service.impl(async function () {
     const db = await cds.connect.to("db");
     const { ZANPR, Plant, Material_V, Order, Payment } = this.entities;
 
+    
+        //    
+        // this.on("p24_er6_getPeriodStatus", async (req) => {
+
+        //     const connectionPost = await cds.connect.to('RestAPI');
+        //     const tx = connectionPost.tx(req).run(req.query);
+        //     return tx;
+
+        // });
+
+        this.on("CREATE", "p24_er6_getPeriodStatus", async (req) => {
+
+            const connectionPost = await cds.connect.to('RestAPI');
+            const tx = await connectionPost.tx(req).run(req.query);
+            return tx;
+
+        });
+
+        this.on("READ", "p24_er6_getPeriodStatus", async (req) => {
+
+            const connectionPost = await cds.connect.to('RestAPI');
+            const tx = connectionPost.tx(req).run(req.query);
+            return tx;
+
+        });
+       
+    
+
 // Uncomment begin for Asset data    
 //     this.on("READ", Plant, async (req) => {
         

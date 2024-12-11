@@ -34,5 +34,20 @@ service CarwashService @(path:'CarwashService') {
     };
     function userInfo() returns String;
     function userInfoUAA() returns String;
+
+
+    @open
+    type object {};
+    
+    entity p24_er6_getPeriodStatus{
+    //  key input : object;  
+    key postingDate : String
+      
+    }
+
+    
+    // action   p24_er6_getPeriodStatus(input : object)       returns object;
+    
+    
     
 }

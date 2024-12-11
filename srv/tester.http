@@ -195,3 +195,15 @@ Content-Type: application/json
 
 ###Get Top orders
 GET http://localhost:4004/odata/v4/CarwashService/Order?$expand=ITEMS&$filter=ORDERNUM eq '2000000514'
+
+
+
+###Get Top orders
+POST http://localhost:4004/odata/v4/CarwashService/p24_er6_getPeriodStatus
+Content-Type: application/json
+ 
+{
+    
+          "postingDate": "2024-09-24"
+   
+}
