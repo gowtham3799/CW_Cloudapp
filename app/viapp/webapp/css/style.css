@@ -75,7 +75,9 @@
     background-color: #00677f;
     height: "100%";
 }
-
+.cl_text2{
+    font-family:arial;
+}
 .Cl_QuickLinkBox0 .sapMTitle {
     position: relative;
     display: inline-block;
